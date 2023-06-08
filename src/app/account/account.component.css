@@ -1,0 +1,22 @@
+.account {
+  position: relative;
+  display: inline-block;
+}
+
+.account-icon {
+  cursor: pointer;
+}
+
+.account-dropdown {
+  width: auto;
+  height: auto;
+  border: 1px solid black;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+}
+
+.account-dropdown.open {
+  display: block;
+}

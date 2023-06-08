@@ -1,1 +1,12 @@
-<p>account works!</p>
+<div class="account">
+  <div class="account-icon" (mouseenter)="toggleDropdown()" (mouseleave)="toggleDropdown()">
+    <span class="material-symbols-outlined">
+      person
+      </span>
+    <span class="account-text">Account</span>
+  </div>
+  <div class="account-dropdown" [ngClass]="{'open': isDropdownOpen}" (mouseleave)="toggleDropdown()">
+    <button class="btn btn-secondary">Login</button>
+    <button class="btn btn-secondary">Register</button>
+  </div>
+</div>

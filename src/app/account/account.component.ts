@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent {
+  isDropdownOpen = false;
 
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
 }

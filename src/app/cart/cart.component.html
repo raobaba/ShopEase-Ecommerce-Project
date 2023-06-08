@@ -1,1 +1,13 @@
-<p>cart works!</p>
+<div class="cart">
+    <div class="cart-icon" (mouseenter)="toggleDropdown()" (mouseleave)="toggleDropdown()">
+        <span class="material-symbols-outlined">
+            shopping_cart
+            </span>
+      <span class="cart-text">Cart</span>
+    </div>
+    <div class="cart-dropdown" [ngClass]="{'open': isDropdownOpen}" (mouseleave)="toggleDropdown()">
+        <a class="dropdown-item" href="#">
+            <span >There are no items in your cart</span>
+          </a>
+    </div>
+  </div>

@@ -1,0 +1,23 @@
+.cart {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .cart-icon {
+    cursor: pointer;
+  }
+  
+  .cart-dropdown {
+    width: auto;
+    height: auto;
+    border: 1px solid black;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+  }
+  
+  .cart-dropdown.open {
+    display: block;
+  }
+  
