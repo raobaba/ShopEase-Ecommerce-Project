@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
+  isMenuOpen: boolean = false;
+  isSubMenuOpen: boolean = false;
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    this.isSubMenuOpen = false;
+  }
+
+  toggleSubMenu() {
+    this.isSubMenuOpen = !this.isSubMenuOpen;
+  }
 }

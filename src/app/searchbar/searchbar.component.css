@@ -1,3 +1,37 @@
 .input-group-append:hover {
     cursor: pointer;
   }
+  .input-group{
+    width:170%;
+  }
+
+ 
+  @media (max-width: 991.98px){
+
+    .input-group{
+      width: 90%;
+    }
+
+  }
+  @media (max-width: 768.98px){
+
+    .input-group{
+      position: fixed;
+      margin-top: -18px;
+      width: 60%;
+    }
+  }
+  @media (max-width: 468.98px){
+
+    .input-group{
+      position: fixed;
+      width: 50%;
+    }
+  }
+  @media (max-width: 268.98px){
+
+    .input-group{
+      position: fixed;
+      width: 30%;
+    }
+  }

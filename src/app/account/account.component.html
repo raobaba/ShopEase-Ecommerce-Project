@@ -2,11 +2,14 @@
   <div class="account-icon" (mouseenter)="toggleDropdown()" (mouseleave)="toggleDropdown()">
     <span class="material-symbols-outlined">
       person
-      </span>
+    </span>
     <span class="account-text">Account</span>
   </div>
   <div class="account-dropdown" [ngClass]="{'open': isDropdownOpen}" (mouseleave)="toggleDropdown()">
-    <button class="btn btn-secondary">Login</button>
-    <button class="btn btn-secondary">Register</button>
+    <button (click)="redirectToLogin()">Login</button>
+    <button (click)="redirectToRegister()">Register</button>
+    <button>Wishlist</button>
+    <button>Your Orders</button>
+    <button>Your Referrals</button>
   </div>
 </div>

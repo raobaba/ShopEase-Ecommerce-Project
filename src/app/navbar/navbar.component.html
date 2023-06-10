@@ -1,19 +1,33 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">
-    <img src="../../assets/app-logo.png" alt="Logo" height="60" width="230">
+    <img src="../../assets/app-logo.png" class="image" alt="Logo" height="60" width="120%">
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item .d-block">
+      <app-searchbar></app-searchbar>
+    </li>
+  </ul>
+  <button class="navbar-toggler .ml-2 position-static .d-none .d-sm-block .d-md-none" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleMenu()">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="collapse navbar-collapse justify-content-between" [ngClass]="{ 'show': isMenuOpen }" id="navbarCollapse">
+    <div class="collapse navbar-collapse" id="subNavbarCollapse" [ngClass]="{ 'show': isSubMenuOpen }">
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+          <app-account></app-account>
+        </li>
+        <li class="nav-item">
+          <app-cart></app-cart>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarCollapse" [ngClass]="{ 'show': isMenuOpen }">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <app-searchbar></app-searchbar>
-      </li>
-      <li class="nav-item">
+      <li class="nav-item d-lg-none .d-md-none">
         <app-account></app-account>
       </li>
-      <li class="nav-item">
+      <li class="nav-item d-lg-none .d-md-none">
         <app-cart></app-cart>
       </li>
     </ul>

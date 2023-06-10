@@ -1,24 +1,89 @@
 .navbar {
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  background-color:rgb(255,255,255) !important;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  display: flex;
+  height: 105px;
+  justify-content: space-around;
+}
+
+.navbar-brand {
+  margin-left: 10%;
+  width: 15%;
+  height: 80px;
+}
+.image{
+  width: 100%;
+  height: 100%;
+}
+.navbar-nav {
+  flex-grow: 4;
+  justify-content: space-around;
+}
+
+.navbar-toggler {
+  border: none;
+  background-color: transparent;
+}
+
+.nav-item {
+  margin-right: 10px;
+}
+
+.a {
+  text-decoration: none;
+}
+@media (max-width: 991.98px){
+  .navbar{
     display: flex;
     justify-content: space-around;
   }
-  
-  .navbar-nav {
-    flex-grow: 1;
-    justify-content: center;
+  .navbar-brand {
+    width: 20%;
+    height: 100px;
+    margin-left: 5%;
   }
-  
-  .navbar-toggler {
-    border: none;
-    background-color: transparent;
+  .image{
+    width: 100%;
+    height: 100%;
   }
-  
-  .nav-item {
-    margin-right: 10px;
+}
+@media (max-width: 768.98px){
+  .navbar{
+    display: flex;
+    justify-content: space-around;
   }
-  
-  .a {
-    text-decoration: none;
+  .navbar-brand{
+    width: 15%;
+    height: 100px;
+    margin-left: 1px;
+    width: 30%;
   }
-  
+  .image{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 468.98px){
+
+  .image{
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (max-width: 268.98px){
+  .navbar{
+    display: flex;
+    justify-content: space-around;
+  }
+  .navbar-brand{
+    width: 15%;
+    height: 100px;
+    margin-left: 1%;
+  }
+  .image{
+    width: 100%;
+    height: 100%;
+  }
+}
+
