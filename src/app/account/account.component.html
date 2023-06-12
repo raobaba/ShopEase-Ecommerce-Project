@@ -6,8 +6,8 @@
     <span class="account-text">Account</span>
   </div>
   <div class="account-dropdown" [ngClass]="{'open': isDropdownOpen}" (mouseleave)="toggleDropdown()">
-    <button (click)="redirectToLogin()">Login</button>
-    <button (click)="redirectToRegister()">Register</button>
+    <button routerLink="/authentication/login" >Login</button>
+    <button routerLink="/authentication/register">Register</button>
     <button>Wishlist</button>
     <button>Your Orders</button>
     <button>Your Referrals</button>

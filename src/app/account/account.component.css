@@ -7,6 +7,7 @@
   cursor: pointer;
 }
 
+
 .account-icon:hover {
   cursor: pointer;
   background-color: rgb(241, 232, 232);
@@ -90,4 +91,12 @@ background-color: white;
   display: block;
   height: auto;
   opacity: 1;
+}
+@media (max-width:991.98px){
+  .account-icon{
+    margin-left: 10%;
+  }
+  .account-text{
+    display: none;
+  }
 }

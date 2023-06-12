@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./searchbar.component.css']
 })
 export class SearchbarComponent {
+  isSearchDropdownOpen: boolean = false;
 
+  toggleSearchDropdown() {
+    this.isSearchDropdownOpen = !this.isSearchDropdownOpen;
+  }
 }

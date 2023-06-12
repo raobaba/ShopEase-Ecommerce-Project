@@ -6,17 +6,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent {
-  isDropdownOpen = false;
+  constructor(private router: Router) {}
 
+  isDropdownOpen = false;
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
-  constructor(private router: Router) {}
 
-  redirectToLogin() {
-    this.router.navigate(['/another-page']);
-  }
-  redirectToRegister(){
-    this.router.navigate(['/another-page'])
-  }
 }

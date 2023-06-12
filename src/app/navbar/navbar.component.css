@@ -1,17 +1,40 @@
 .navbar {
-  background-color:rgb(255,255,255) !important;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  background-color: rgb(255, 255, 255) !important;
+  /* box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px; */
   display: flex;
   height: 105px;
   justify-content: space-around;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
-
+ul{
+  list-style: none;
+  cursor: pointer;
+}
+.below-navbar {
+  background-color: rgb(255, 255, 255) !important;
+  border: 3px solid black;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  height: 35px;
+  position: sticky;
+  top: 105px; /* Adjust this value based on the height of the navbar */
+  z-index: 999;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+.below-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
 .navbar-brand {
   margin-left: 10%;
   width: 15%;
   height: 80px;
 }
-.image{
+.image {
   width: 100%;
   height: 100%;
 }
@@ -19,21 +42,62 @@
   flex-grow: 4;
   justify-content: space-around;
 }
+.hide-nav{
+  width: 50%;
+  height: auto;
+}
+#small-box{
+  width: 25%;
+  height: auto;
+  text-align: start;
+  background-color: rgb(255, 255, 255);
+}
+#small-box li{
+  margin-left: 10%;
+  font-weight: 400;
+  margin-top: 10%;
+}
 
 .navbar-toggler {
   border: none;
   background-color: transparent;
 }
-
-.nav-item {
-  margin-right: 10px;
+.nav-item-2{
+  margin-left: 20%;
 }
-
-.a {
-  text-decoration: none;
+@media (max-width: 1267.97px) {
+  .nav-item-1 {
+    padding-left: 5%;
+  }
+  .nav-item-2 {
+    padding-left: 5%;
+  }
 }
-@media (max-width: 991.98px){
-  .navbar{
+@media (max-width: 991.98px) {
+  .nav-item-2{
+    margin-top: -10%;
+  }
+  .nav-item-3 {
+    margin-left: 50%;
+    margin-top: -10%;
+  }
+  .nav-item-4{
+    margin-left: 70%;
+    margin-top: -10%;
+  }
+  .admin-text{
+    display: none;
+  }
+  #small-box{
+    width: 25%;
+    height: auto;
+    text-align: start;
+    border: 1px solid black;
+  }
+  .nav-item-1 {
+    display: none;
+  }
+  .navbar {
     display: flex;
     justify-content: space-around;
   }
@@ -42,48 +106,112 @@
     height: 100px;
     margin-left: 5%;
   }
-  .image{
+  .image {
     width: 100%;
     height: 100%;
   }
 }
-@media (max-width: 768.98px){
-  .navbar{
+@media (max-width: 768.98px) {
+  .nav-item-2{
+    margin-top: 11%;
+  }
+  .nav-item-3 {
+    margin-left: 50%;
+    margin-top: -13%;
+  }
+  .nav-item-4{
+    margin-left: 70%;
+    margin-top: -12%;
+  }
+  #small-box{
+    width: 35%;
+    height: auto;
+    text-align: start;
+    border: 1px solid black;
+  }
+  .navbar {
     display: flex;
     justify-content: space-around;
   }
-  .navbar-brand{
+  .navbar-brand {
     width: 15%;
     height: 100px;
     margin-left: 1px;
     width: 30%;
   }
-  .image{
+  .image {
     width: 100%;
     height: 100%;
   }
 }
-
-@media (max-width: 468.98px){
-
-  .image{
+@media(max-width: 600.98px){
+  .nav-item-2{
+    margin-left: 1%;
+    margin-top: -10%;
+  }
+  .nav-item-3 {
+    margin-left: 40%;
+    margin-top: -18%;
+  }
+  .nav-item-4{
+    margin-left: 70%;
+    margin-top: -14%;
+  }
+}
+@media (max-width: 468.98px) {
+  .nav-item-2{
+    margin-left: 1%;
+    margin-top: -10%;
+  }
+  .nav-item-3 {
+    margin-left: 40%;
+    margin-top: -25%;
+  }
+  .nav-item-4{
+    margin-left: 70%;
+    margin-top: -25%;
+  }
+  .image {
     width: 100%;
     height: 100%;
   }
+  #small-box{
+    width: 45%;
+    height: auto;
+    text-align: start;
+    border: 1px solid black;
+  }
 }
-@media (max-width: 268.98px){
-  .navbar{
+@media (max-width: 280.98px) {
+  .nav-item-2{
+    margin-left: -15%;
+    margin-top: 5%;
+  }
+  .nav-item-3 {
+    margin-left:35%;
+    margin-top: -35%;
+  }
+  .nav-item-4{
+    margin-left: 70%;
+    margin-top: -40%;
+  }
+  .navbar {
     display: flex;
     justify-content: space-around;
   }
-  .navbar-brand{
-    width: 15%;
+  #small-box{
+    width: 55%;
+    height: auto;
+    text-align: start;
+    border: 1px solid black;
+  }
+  .navbar-brand {
+    width: 25%;
     height: 100px;
     margin-left: 1%;
   }
-  .image{
+  .image {
     width: 100%;
     height: 100%;
   }
 }
-

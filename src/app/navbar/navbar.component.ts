@@ -8,6 +8,11 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
   isMenuOpen: boolean = false;
   isSubMenuOpen: boolean = false;
+  isAdminVisible: boolean = false;
+
+  checkAdminVisibility() {
+    this.isAdminVisible = true;
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -17,4 +22,5 @@ export class NavbarComponent {
   toggleSubMenu() {
     this.isSubMenuOpen = !this.isSubMenuOpen;
   }
+
 }

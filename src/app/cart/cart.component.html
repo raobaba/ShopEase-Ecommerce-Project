@@ -2,12 +2,13 @@
     <div class="cart-icon" (mouseenter)="toggleDropdown()" (mouseleave)="toggleDropdown()">
         <span class="material-symbols-outlined">
             shopping_cart
-            </span>
+        </span>
       <span class="cart-text">Cart</span>
+      <div class="counter">{{ cartItemCount }}</div>
     </div>
     <div class="cart-dropdown" [ngClass]="{'open': isDropdownOpen}" (mouseleave)="toggleDropdown()">
         <a class="dropdown-item" href="#">
-            <span >There are no items in your cart</span>
+            <span >{{cartStatus}}</span>
           </a>
     </div>
   </div>
