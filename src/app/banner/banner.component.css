@@ -1,0 +1,19 @@
+.product-item-content {
+	border: 1px solid var(--surface-d);
+	border-radius: 3px;
+	text-align: center;
+	background-color: snow;
+}
+
+  .product-image {
+    width: 50%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+        0 3px 6px rgba(0, 0, 0, 0.23);
+}
+h3{
+    color:red;
+    text-align: center;
+}
+.p-carousel-dot-icon{
+    display: none;
+}

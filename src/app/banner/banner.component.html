@@ -1,0 +1,15 @@
+<div id="Banner" *ngIf="showBanner">
+  <div style="width:100%;">
+    <p-carousel class="p-carousel-indicators" [value]="bannerData" [autoplayInterval]="2000"
+      [styleClass]="'custom-carousel'">
+      <ng-template let-images pTemplate="item">
+        <div class="product-item" style="width:100%">
+          <div class="product-item-content">
+            <img [src]="images.url" style="overflow: hidden;background-repeat: no-repeat;" width="100%" height="100%"
+              [alt]="images.alt">
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>

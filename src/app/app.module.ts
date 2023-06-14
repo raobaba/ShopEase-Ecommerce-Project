@@ -13,7 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './authentication/admin/admin.component';
-
+import { BannerComponent } from './banner/banner.component';
+import { CarouselModule } from 'primeng/carousel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,10 +25,12 @@ import { AdminComponent } from './authentication/admin/admin.component';
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    AdminComponent
+    AdminComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule,
+    CarouselModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

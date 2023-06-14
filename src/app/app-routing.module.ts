@@ -4,12 +4,14 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { AdminComponent } from './authentication/admin/admin.component';
+import { BannerComponent } from './banner/banner.component';
 
 const routes: Routes = [
-  {path:'home',component:HomeComponent},
-  {path:'authentication/login',component:LoginComponent},
-  {path:'authentication/register',component:RegisterComponent},
-  {path:'authentication/admin',component:AdminComponent}
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'authentication/login', component: LoginComponent, data: { hideBanner: true } },
+  { path: '', component: BannerComponent },
+  { path: 'authentication/register', component: RegisterComponent },
+  { path: 'authentication/admin', component: AdminComponent }
 ];
 
 @NgModule({
