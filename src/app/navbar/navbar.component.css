@@ -19,7 +19,7 @@ ul{
   border-bottom: none;
   border-left: none;
   border-right: none;
-  height: 35px;
+  height: 75px;
   position: sticky;
   top: 105px; /* Adjust this value based on the height of the navbar */
   z-index: 999;
@@ -52,6 +52,17 @@ ul{
   height: auto;
   text-align: start;
   background-color: rgb(255, 255, 255);
+}
+.small-nav{
+  height: 80%;
+}
+.small-nav>img{
+  width: 50px;
+  margin-left: 15px;
+}
+.small-nav>p{
+  margin-top: -5px;
+  font-weight: 500;
 }
 #small-box li{
   margin-left: 10%;
