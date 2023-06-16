@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './authentication/admin/admin.component';
 import { BannerComponent } from './banner/banner.component';
 import { CarouselModule } from 'primeng/carousel';
+import { NavComponent } from './nav/nav.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { CarouselModule } from 'primeng/carousel';
     LoginComponent,
     HomeComponent,
     AdminComponent,
-    BannerComponent
+    BannerComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

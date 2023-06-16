@@ -17,3 +17,22 @@ h3{
 .p-carousel-dot-icon{
     display: none;
 }
+
+.images{
+    width: 100%;
+    display: flex;
+    margin-top: -2.9%;
+    justify-content: space-around;
+}
+.images>img{
+    width: 33%;
+    height: 200px;
+}
+@media (max-width:991.98px) {
+    .images{
+        width: 100%;
+        margin-top: -2%;
+    }
+}
+
+
