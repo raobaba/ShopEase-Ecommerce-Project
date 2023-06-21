@@ -13,17 +13,12 @@ export class NavComponent {
   checkAdminVisibility() {
     this.isAdminVisible = true;
   }
-
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.isSubMenuOpen = false;
   }
-
   toggleSubMenu() {
     this.isSubMenuOpen = !this.isSubMenuOpen;
   }
-  showNav = true;
-  hideNav() {
-    this.showNav = false;
-  }
+
 }

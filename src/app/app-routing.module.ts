@@ -11,14 +11,9 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '', component: BannerComponent },
   { path: '', component: NavComponent },
-  {
-    path: 'authentication/login',
-    component: LoginComponent,
-    data: { hideBanner: true },
-  
-  },
-  { path: 'authentication/register', component: RegisterComponent,  data: { hideNav: true }, },
-  { path: 'authentication/admin', component: AdminComponent },
+  {path:'authentication/admin',component:AdminComponent},
+  {path: 'authentication/login',component: LoginComponent},
+  { path: 'authentication/register', component: RegisterComponent},
 ];
 
 @NgModule({

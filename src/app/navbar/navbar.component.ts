@@ -9,16 +9,14 @@ export class NavbarComponent {
   isMenuOpen: boolean = false;
   isSubMenuOpen: boolean = false;
   isAdminVisible: boolean = false;
-
+  
   checkAdminVisibility() {
     this.isAdminVisible = true;
   }
-
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.isSubMenuOpen = false;
   }
-
   toggleSubMenu() {
     this.isSubMenuOpen = !this.isSubMenuOpen;
   }

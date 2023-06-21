@@ -24,8 +24,5 @@ export class BannerComponent {
       url: 'https://rukminim1.flixcart.com/flap/3376/560/image/f6202f13b6f89b03.jpg?q=50',
     }
   ];
-  showBanner = true;
-  hideBanner() {
-    this.showBanner = false;
-  }
+ 
 }
