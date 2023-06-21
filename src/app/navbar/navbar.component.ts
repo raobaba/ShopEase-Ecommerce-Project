@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
   isMenuOpen: boolean = false;
   isSubMenuOpen: boolean = false;
-  isAdminVisible: boolean = false;
+  isAdminVisible: boolean = true;
   
   checkAdminVisibility() {
     this.isAdminVisible = true;

@@ -16,6 +16,8 @@ import { AdminComponent } from './authentication/admin/admin.component';
 import { BannerComponent } from './banner/banner.component';
 import { CarouselModule } from 'primeng/carousel';
 import { NavComponent } from './nav/nav.component';
+import { ElectronicsComponent } from './electronics/electronics.component';
+import { TopOffersComponent } from './top-offers/top-offers.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,9 @@ import { NavComponent } from './nav/nav.component';
     HomeComponent,
     AdminComponent,
     BannerComponent,
-    NavComponent
+    NavComponent,
+    ElectronicsComponent,
+    TopOffersComponent
   ],
   imports: [
     BrowserModule,

@@ -9,8 +9,6 @@ import { NavComponent } from './nav/nav.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '', component: BannerComponent },
-  { path: '', component: NavComponent },
   {path:'authentication/admin',component:AdminComponent},
   {path: 'authentication/login',component: LoginComponent},
   { path: 'authentication/register', component: RegisterComponent},
