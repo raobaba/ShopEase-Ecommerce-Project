@@ -1,33 +1,55 @@
 .product-item-content {
-	border-radius: 3px;
-	text-align: center;
-	background-color: snow;
-}
-.product-item{
+    border-radius: 3px;
+    text-align: center;
+    background-color: snow;
+  }
+  
+  .product-item {
     width: 100%;
     margin-top: 1%;
     border-radius: 10px;
-}
+  }
+  
   .product-image {
-    width: 50%;
-   
-}
-.p-carousel-indicators{
+    width: 100%; /* Updated: Set image width to 100% */
+  }
+  
+  .p-carousel-indicators {
     color: aliceblue;
     background-color: aliceblue;
-}
-h3{
-    color:red;
+  }
+  
+  h3 {
+    color: red;
     text-align: center;
-}
-.p-carousel-dot-icon{
+  }
+  
+  .p-carousel-dot-icon {
     display: none;
-
-}
-.big-box{
+  }
+  
+  .big-box {
     width: 100%;
-}
-
-
-
-
+  }
+  
+  .custom-carousel .p-carousel-prev,
+  .custom-carousel .p-carousel-next {
+    color: red; /* Updated: Set button color to red */
+    background-color: white; /* Updated: Set button background color to white */
+    border-radius: 50%; /* Updated: Set button border radius */
+    font-size: 24px; /* Updated: Set button font size */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .custom-carousel .p-carousel-prev {
+    left: 10px; /* Updated: Set left position of previous button */
+  }
+  
+  .custom-carousel .p-carousel-next {
+    right: 10px; /* Updated: Set right position of next button */
+  }
+  

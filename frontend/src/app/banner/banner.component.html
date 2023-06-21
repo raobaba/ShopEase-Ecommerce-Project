@@ -5,12 +5,10 @@
       <ng-template let-images pTemplate="item">
         <div class="product-item">
           <div class="product-item-content">
-            <img [src]="images.url" style="background-repeat: no-repeat;" width="100%" height="100%"
-              [alt]="images.alt">
+            <img [src]="images.url" style="background-repeat: no-repeat;" width="100%" height="100%" [alt]="images.alt">
           </div>
         </div>
       </ng-template>
     </p-carousel>
   </div>
 </div>
-
