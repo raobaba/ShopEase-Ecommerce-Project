@@ -30,6 +30,17 @@
   }
   .box8 {
     margin-left: auto;
+    cursor: pointer;
+  }
+  .box8 img{
+    width: 129%;
+    height: 118%;
+  }
+  @media (max-width:468.98px){
+    .box8 img{
+        width: 129%;
+        height: 118%;
+      }
   }
   .arrow-button {
     position: sticky;
