@@ -18,6 +18,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { NavComponent } from './nav/nav.component';
 import { ElectronicsComponent } from './electronics/electronics.component';
 import { TopOffersComponent } from './top-offers/top-offers.component';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { TopOffersComponent } from './top-offers/top-offers.component';
     BannerComponent,
     NavComponent,
     ElectronicsComponent,
-    TopOffersComponent
+    TopOffersComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
