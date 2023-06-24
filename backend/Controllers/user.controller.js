@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 
 const registerUser = async (req, res) => {
     const { fullName, userName, email, password } = req.body;
-
     try {
         bcrypt.hash(password, 5, async (err, hash) => {
             if (err) {
@@ -23,10 +22,8 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
-
     try {
         const user = await UserModel.findOne({ email });
-
         if (user) {
             bcrypt.compare(password, user.password, (err, result) => {
                 if (result) {
@@ -56,22 +53,18 @@ const getUser = async (req, res) => {
   
   const updateUser = async (req, res) => {
     const { fullName, userName, email, password } = req.body;
-  
     try {
       const user = await UserModel.findById(req.params.userId);
       if (!user) {
         return res.status(404).json({ error: "User not found" });
       }
-  
       user.fullName = fullName;
       user.userName = userName;
       user.email = email;
-  
       if (password) {
         const hashedPassword = await bcrypt.hash(password, 5);
         user.password = hashedPassword;
       }
-  
       await user.save();
       res.json({ message: "User updated successfully" });
     } catch (err) {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -6,8 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
+  formSubmitted: boolean = false;
+  constructor(private http: HttpClient) { }
   submitForm() {
-    // Logic to handle form submission
-    console.log('Form submitted!');
+    this.formSubmitted = true;
+    // Handle form submission logic here
   }
 }
