@@ -1,41 +1,36 @@
-<!-- form.component.html -->
 <div class="container">
-    <!-- <div class="form-group">
-        <button type="button" class="btn btn-primary">Sign in with Google</button>
-        (click)="signInWithGoogle()" 
+    <form (ngSubmit)="submitForm()" #form="ngForm">
+      <div class="form-group">
+        <label for="userName"><span class="required">*</span>User Name </label>
+        <input type="text" id="userName" class="form-control" name="userName" required [(ngModel)]="userName"
+          #userNameInput="ngModel">
+        <div style="font-size: 10px;" *ngIf="userNameInput.touched && userNameInput.invalid || (formSubmitted && userNameInput.invalid)"
+          class="alert alert-danger alert-text">
+          User Name is required.
+        </div>
       </div>
       <div class="form-group">
-        <button type="button" class="btn btn-primary" >Sign in with Facebook</button> 
-       (click)="signInWithFacebook()" 
-      </div> -->
-    <form (ngSubmit)="submitForm()" #form="ngForm">
-        <div class="form-group">
-            <label for="userName"><span class="required">*</span>User Name </label>
-            <input type="text" id="userName" class="form-control" name="userName" required ngModel
-                #userNameInput="ngModel">
-            <div *ngIf="userNameInput.touched && userNameInput.invalid" class="alert alert-danger alert-text">
-                User Name is required.
-            </div>
+        <label for="email"><span class="required">*</span>Email </label>
+        <input type="email" id="email" class="form-control" name="email" required [(ngModel)]="email" #emailInput="ngModel">
+        <div style="font-size: 10px;" *ngIf="emailInput.touched && emailInput.invalid || (formSubmitted && emailInput.invalid)"
+          class="alert alert-danger alert-text">
+          Email is required.
         </div>
-        <div class="form-group">
-            <label for="email"><span class="required">*</span>Email </label>
-            <input type="email" id="email" class="form-control" name="email" required ngModel #emailInput="ngModel">
-            <div *ngIf="emailInput.touched && emailInput.invalid" class="alert alert-danger alert-text">
-                Email is required.
-            </div>
+      </div>
+      <div class="form-group">
+        <label for="password"><span class="required">*</span>Password </label>
+        <input type="password" id="password" class="form-control" name="password" required [(ngModel)]="password"
+          #passwordInput="ngModel">
+        <div style="font-size: 10px;" *ngIf="passwordInput.touched && passwordInput.invalid || (formSubmitted && passwordInput.invalid)"
+          class="alert alert-danger alert-text">
+          Password is required.
         </div>
-        <div class="form-group">
-            <label for="password"><span class="required">*</span>Password </label>
-            <input type="password" id="password" class="form-control" name="password" required ngModel
-                #passwordInput="ngModel">
-            <div *ngIf="passwordInput.touched && passwordInput.invalid" class="alert alert-danger alert-text">
-                Password is required.
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <div class="login-link" >
-            If you haven't an account, <a routerLink="/authentication/register">Register</a> here.
-        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+      <div class="login-link">
+        Don't have an Account, <a routerLink="/authentication/register">Register</a> here.
+      </div>
     </form>
-</div>
-<app-footer></app-footer>
+  </div>
+  <app-footer></app-footer>
+  

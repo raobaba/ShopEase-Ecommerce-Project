@@ -21,7 +21,6 @@ const registerUser = async (req, res) => {
   }
 };
 
-
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -30,6 +29,9 @@ const loginUser = async (req, res) => {
       bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
           const token = jwt.sign({ userID: user._id }, process.env.key);
+          // Store the token in the response headers
+          console.log(token)
+          res.setHeader('Authorization', `Bearer ${token}`);
           res.status(200).json({ success: true, message: 'Login Successful', token });
         } else {
           res.status(401).json({ success: false, message: 'Wrong Credentials' });
@@ -43,6 +45,7 @@ const loginUser = async (req, res) => {
     res.status(500).json({ success: false, message: 'Something went wrong' });
   }
 };
+
 
 
 const getUser = async (req, res) => {

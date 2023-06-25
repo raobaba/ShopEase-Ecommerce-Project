@@ -1,2 +1,14 @@
-<h1>admin works</h1>
+<div class="container">
+    <h1>User Details</h1>
+    <div *ngIf="loading" class="loading-message">Loading...</div>
+    <div *ngIf="user">
+      <div class="user-details">
+        <p><strong>Full Name:</strong> {{ user.fullName }}</p>
+        <p><strong>User Name:</strong> {{ user.userName }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Password:</strong> {{ user.password }}</p>
+      </div>
+    </div>
+  </div>
+  
 <app-footer></app-footer>
