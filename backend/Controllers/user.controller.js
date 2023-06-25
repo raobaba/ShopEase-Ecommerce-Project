@@ -3,86 +3,95 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const registerUser = async (req, res) => {
-    const { fullName, userName, email, password } = req.body;
-    try {
-        bcrypt.hash(password, 5, async (err, hash) => {
-            if (err) {
-                console.log(err);
-            } else {
-                const user = new UserModel({ fullName, userName, email, password: hash });
-                await user.save();
-                res.send("Registered");
-            }
-        });
-    } catch (err) {
-        res.send("Error in registering the user");
+  const { fullName, userName, email, password } = req.body;
+  try {
+    bcrypt.hash(password, 5, async (err, hash) => {
+      if (err) {
         console.log(err);
-    }
+        res.status(500).json({ success: false, message: 'Error in hashing password' });
+      } else {
+        const user = new UserModel({ fullName, userName, email, password: hash });
+        await user.save();
+        res.status(200).json({ success: true, message: 'Registered' });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, message: 'Error in registering the user' });
+  }
 };
+
 
 const loginUser = async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const user = await UserModel.findOne({ email });
-        if (user) {
-            bcrypt.compare(password, user.password, (err, result) => {
-                if (result) {
-                    const token = jwt.sign({ userID: user._id }, process.env.key);
-                    res.send({ "msg": "Login Successful", "token": token });
-                } else {
-                    res.send("Wrong Credentials");
-                }
-            });
+  const { email, password } = req.body;
+  try {
+    const user = await UserModel.findOne({ email });
+    if (user) {
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (result) {
+          const token = jwt.sign({ userID: user._id }, process.env.key);
+          res.status(200).json({ success: true, message: 'Login Successful', token });
         } else {
-            res.send("Wrong Credentials");
+          res.status(401).json({ success: false, message: 'Wrong Credentials' });
         }
-    } catch (err) {
-        res.send("Something went wrong");
-        console.log(err);
+      });
+    } else {
+      res.status(401).json({ success: false, message: 'Wrong Credentials' });
     }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, message: 'Something went wrong' });
+  }
 };
 
+
 const getUser = async (req, res) => {
-    try {
-        const users = await UserModel.find();
-        res.json(users);
-      } catch (err) {
-        res.status(500).json({ error: "Failed to fetch users" });
-      }
-  };
+  try {
+    const users = await UserModel.find();
+    res.status(200).json(users);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch users" });
+  }
+};
+
   
-  const updateUser = async (req, res) => {
-    const { fullName, userName, email, password } = req.body;
-    try {
-      const user = await UserModel.findById(req.params.userId);
-      if (!user) {
-        return res.status(404).json({ error: "User not found" });
-      }
-      user.fullName = fullName;
-      user.userName = userName;
-      user.email = email;
-      if (password) {
-        const hashedPassword = await bcrypt.hash(password, 5);
-        user.password = hashedPassword;
-      }
-      await user.save();
-      res.json({ message: "User updated successfully" });
-    } catch (err) {
-      res.status(500).json({ error: "Failed to update user" });
+const updateUser = async (req, res) => {
+  const { fullName, userName, email, password } = req.body;
+  try {
+    const user = await UserModel.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
-  };
+    user.fullName = fullName;
+    user.userName = userName;
+    user.email = email;
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 5);
+      user.password = hashedPassword;
+    }
+    await user.save();
+    res.status(200).json({ message: "User updated successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to update user" });
+  }
+};
+
   
-  const deleteUser = async (req, res) => {
-    try {
-      const user = await UserModel.findByIdAndDelete(req.params.userId);
-      if (!user) {
-        return res.status(404).json({ error: "User not found" });
-      }
-      res.json({ message: "User deleted successfully" });
-    } catch (err) {
-      res.status(500).json({ error: "Failed to delete user" });
+const deleteUser = async (req, res) => {
+  try {
+    const user = await UserModel.findByIdAndDelete(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
-  };
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to delete user" });
+  }
+};
+
   
   module.exports = {
     registerUser,
