@@ -6,12 +6,14 @@ import { RegisterComponent } from './authentication/register/register.component'
 import { AdminComponent } from './authentication/admin/admin.component';
 import { BannerComponent } from './banner/banner.component';
 import { NavComponent } from './nav/nav.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  {path:'authentication/admin',component:AdminComponent},
-  {path: 'authentication/login',component: LoginComponent},
-  { path: 'authentication/register', component: RegisterComponent},
+  { path: 'authentication/admin', component: AdminComponent },
+  { path: 'authentication/login', component: LoginComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'authentication/register', component: RegisterComponent },
 ];
 
 @NgModule({

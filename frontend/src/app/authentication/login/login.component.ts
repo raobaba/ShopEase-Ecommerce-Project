@@ -39,7 +39,7 @@ export class LoginComponent {
 
           this.loginService.getUserData(token).subscribe(
             (data: any) => {
-              console.log('Endpoint response:', data);
+              console.log('Endpoint response:', data[data.length-1].email);
               this.router.navigateByUrl('/');
             },
             (error: any) => {

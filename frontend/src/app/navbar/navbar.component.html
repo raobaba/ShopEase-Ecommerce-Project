@@ -20,7 +20,22 @@
       <app-account></app-account>
     </li>
     <li class="nav-item-3">
-      <app-cart></app-cart>
+      <a class="nav-link" routerLink="/cart"> <!-- Updated code -->
+        <div class="cart">
+          <div class="cart-icon" (mouseenter)="toggleDropdown()" (mouseleave)="toggleDropdown()">
+            <span class="material-symbols-outlined">
+              shopping_cart
+            </span>
+            <span class="cart-text">Cart</span>
+            <div class="counter">{{ cartItemCount }}</div>
+          </div>
+          <div class="cart-dropdown" [ngClass]="{'open': isDropdownOpen}" (mouseleave)="toggleDropdown()">
+            <a class="dropdown-item" href="#">
+              <span>{{ cartStatus }}</span>
+            </a>
+          </div>
+        </div>
+      </a>
     </li>
     <li class="nav-item-4" routerLink="/authentication/admin" *ngIf="isAdminVisible">
       <div>
