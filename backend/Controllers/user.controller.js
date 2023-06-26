@@ -29,8 +29,7 @@ const loginUser = async (req, res) => {
       bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
           const token = jwt.sign({ userID: user._id }, process.env.key);
-          // Store the token in the response headers
-          console.log(token)
+          // Set the token in the response headers
           res.setHeader('Authorization', `Bearer ${token}`);
           res.status(200).json({ success: true, message: 'Login Successful', token });
         } else {
@@ -47,18 +46,16 @@ const loginUser = async (req, res) => {
 };
 
 
-
 const getUser = async (req, res) => {
   try {
-    const users = await UserModel.find();
+    const users = await UserModel.find({}, { password: 0 });
     res.status(200).json(users);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Failed to fetch users" });
+    res.status(500).json({ success: false, message: "Failed to fetch users" });
   }
 };
 
-  
 const updateUser = async (req, res) => {
   const { fullName, userName, email, password } = req.body;
   try {

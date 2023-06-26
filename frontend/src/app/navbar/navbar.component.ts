@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '.././service/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,17 +9,20 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
   isMenuOpen: boolean = false;
   isSubMenuOpen: boolean = false;
-  isAdminVisible: boolean = true;
+  isAdminVisible: boolean = false;
   
+  constructor(private authService: AuthService) {}
+
   checkAdminVisibility() {
-    this.isAdminVisible = true;
+    this.isAdminVisible = this.authService.isAdminVisible;
   }
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.isSubMenuOpen = false;
   }
+
   toggleSubMenu() {
     this.isSubMenuOpen = !this.isSubMenuOpen;
   }
-
 }
