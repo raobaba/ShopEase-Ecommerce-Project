@@ -43,10 +43,6 @@ export class LoginComponent {
 
           this.authService.updateUser(response); // Update user information
 
-          if (response.email === 'admin@gmail.com') {
-            this.authService.checkAdminVisibility(); // Call checkAdminVisibility if email is admin@gmail.com
-          }
-
           this.http.get('http://localhost:8080/getUser', { headers }).subscribe(
             (data: any) => {
               console.log('Endpoint response:', data);

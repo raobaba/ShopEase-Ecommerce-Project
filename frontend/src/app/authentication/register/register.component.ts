@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { RegisterService } from '../../service/register.service';
 
 @Component({
   selector: 'app-register',
@@ -13,40 +13,37 @@ export class RegisterComponent {
   userName: string = '';
   email: string = '';
   password: string = '';
+  router: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private registerService: RegisterService) { }
 
   submitForm() {
     this.formSubmitted = true;
-    const formData = {
-      fullName: this.fullName,
-      userName: this.userName,
-      email: this.email,
-      password: this.password
-    };
 
-    this.http.post('http://localhost:8080/register', formData).subscribe(
-      (response: any) => {
-        if (response && response.success) {
-          alert('SIGNUP SUCCESSFUL');
-          console.log('API request successful', response);
-          this.router.navigate(['/authentication/login']); // Redirect to login page
-        } else {
-          this.handleRegistrationError();
-          console.error('API request error', response);
+    this.registerService.registerUser(this.fullName, this.userName, this.email, this.password)
+      .subscribe(
+        (response: any) => {
+          if (response && response.success) {
+            alert('SIGNUP SUCCESSFUL');
+            console.log('API request successful', response);
+            this.router.navigate(['/authentication/login']); // Redirect to login page
+          } else {
+            this.handleRegistrationError();
+            console.error('API request error', response);
+          }
+        },
+        (error: any) => {
+          if (error instanceof SyntaxError) {
+            this.handleRegistrationError();
+            console.error('JSON parsing error', error);
+          } else {
+            console.error('API request error', error);
+            this.handleRegistrationError();
+          }
         }
-      },
-      (error: any) => {
-        if (error instanceof SyntaxError) {
-          this.handleRegistrationError();
-          console.error('JSON parsing error', error);
-        } else {
-          console.error('API request error', error);
-          this.handleRegistrationError();
-        }
-      }
-    );
+      );
   }
+
   private handleRegistrationError() {
     alert('Error occurred during signup. Please try again later.');
   }

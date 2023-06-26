@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '.././service/auth.service';
 
 @Component({
@@ -6,15 +6,20 @@ import { AuthService } from '.././service/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isMenuOpen: boolean = false;
   isSubMenuOpen: boolean = false;
   isAdminVisible: boolean = false;
-  
+
   constructor(private authService: AuthService) {}
 
+  ngOnInit() {
+    this.checkAdminVisibility();
+  }
+
   checkAdminVisibility() {
-    this.isAdminVisible = this.authService.isAdminVisible;
+    this.isAdminVisible = true;
+    console.log(this.isAdminVisible)
   }
 
   toggleMenu() {
