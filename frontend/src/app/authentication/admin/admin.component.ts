@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AdminService } from '../../service/admin.service';
 
 interface User {
   _id: string;
@@ -13,13 +15,14 @@ interface User {
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
+  providers: [AdminService] // Add the service provider
 })
 export class AdminComponent implements OnInit {
   loading: boolean = false;
   users: User[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private adminService: AdminService) {}
 
   ngOnInit() {
     this.getUserDetails();
@@ -29,8 +32,7 @@ export class AdminComponent implements OnInit {
     this.loading = true;
 
     const token = localStorage.getItem('token') || '';
-    const headers = new HttpHeaders().set('Authorization', token);
-    this.http.get<User[]>('http://localhost:8080/getUser', { headers }).subscribe(
+    this.adminService.getUserDetails(token).subscribe(
       (response: User[]) => {
         this.loading = false;
         this.users = response.map(user => ({ ...user, editMode: false }));
@@ -49,17 +51,8 @@ export class AdminComponent implements OnInit {
 
   async updateUser(user: User) {
     try {
-      const { fullName, userName, email, password } = user;
-      const updatedUser = {
-        fullName,
-        userName,
-        email,
-        password
-      };
-
       const token = localStorage.getItem('token') || '';
-      const headers = new HttpHeaders().set('Authorization', token);
-      await this.http.put(`http://localhost:8080/${user._id}`, updatedUser, { headers }).toPromise();
+      await this.adminService.updateUser(token, user);
       user.editMode = false;
       console.log('User updated successfully');
     } catch (error) {
@@ -70,8 +63,7 @@ export class AdminComponent implements OnInit {
   async deleteUser(user: User) {
     try {
       const token = localStorage.getItem('token') || '';
-      const headers = new HttpHeaders().set('Authorization', token);
-      await this.http.delete(`http://localhost:8080/${user._id}`, { headers }).toPromise();
+      await this.adminService.deleteUser(token, user);
       this.users = this.users.filter(u => u._id !== user._id);
       console.log('User deleted successfully');
     } catch (error) {
