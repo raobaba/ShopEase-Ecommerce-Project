@@ -1,25 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '.././service/auth.service';
+import { Component } from '@angular/core';
+import { LoginService } from '.././service/login.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   isMenuOpen: boolean = false;
   isSubMenuOpen: boolean = false;
   isAdminVisible: boolean = false;
 
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.checkAdminVisibility();
-  }
+  constructor(private loginService: LoginService) {}
 
   checkAdminVisibility() {
-    this.isAdminVisible = true;
-    console.log(this.isAdminVisible)
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      this.loginService.getUserData(token).subscribe(
+        (data: any) => {
+          if (data && data.email === 'admin@gmail.com') {
+            this.isAdminVisible = true;
+          }
+        },
+        (error: any) => {
+          console.error('Endpoint error:', error);
+        }
+      );
+    }
   }
 
   toggleMenu() {
