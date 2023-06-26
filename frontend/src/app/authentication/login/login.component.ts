@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth.service';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +14,8 @@ export class LoginComponent {
   password: string = '';
 
   constructor(
-    private http: HttpClient,
-    private router: Router,
-    private authService: AuthService
+    private loginService: LoginService,
+    private router: Router
   ) { }
 
   submitForm() {
@@ -28,22 +26,18 @@ export class LoginComponent {
       password: this.password
     };
 
-    this.http.post<any>('http://localhost:8080/login', formData).subscribe(
+    this.loginService.loginUser(formData).subscribe(
       (response: any) => {
         if (response && response.success) {
           alert('LOGIN SUCCESSFUL');
           console.log('API request successful', response);
           const token = response.token;
           console.log(token);
-          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-          console.log(headers);
 
           // Store the token in localStorage
           localStorage.setItem('token', token);
 
-          this.authService.updateUser(response); // Update user information
-
-          this.http.get('http://localhost:8080/getUser', { headers }).subscribe(
+          this.loginService.getUserData(token).subscribe(
             (data: any) => {
               console.log('Endpoint response:', data);
               this.router.navigateByUrl('/');

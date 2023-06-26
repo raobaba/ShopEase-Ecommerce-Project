@@ -13,9 +13,8 @@ export class RegisterComponent {
   userName: string = '';
   email: string = '';
   password: string = '';
-  router: any;
 
-  constructor(private registerService: RegisterService) { }
+  constructor(private registerService: RegisterService, private router:Router) { }
 
   submitForm() {
     this.formSubmitted = true;
