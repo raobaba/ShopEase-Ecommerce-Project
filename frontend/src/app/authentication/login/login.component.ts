@@ -41,7 +41,7 @@ export class LoginComponent {
             (data: any) => {
               console.log('Endpoint response:', data[data.length - 1].email);
               if (data[data.length - 1].email === 'admin@gmail.com') {
-                this.router.navigateByUrl('/authorization/admin');
+                this.router.navigateByUrl('/authentication/admin');
               } else {
                 this.router.navigateByUrl('/');
               }
