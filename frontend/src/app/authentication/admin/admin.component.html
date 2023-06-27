@@ -1,7 +1,14 @@
 <div class="container">
   <h1>User Details</h1>
   <div *ngIf="loading" class="loading-message">Loading...</div>
-  <div>
+  
+  <div *ngIf="adminUser">
+    <h1>{{ adminUser.fullName }} (Admin)</h1>
+    <p><strong>User Name:</strong> {{ adminUser.userName }}</p>
+    <p><strong>Email:</strong> {{ adminUser.email }}</p>
+  </div>
+
+  <div *ngIf="users.length > 0">
     <table class="user-table">
       <tr class="user-head">
         <th>Full Name</th>

@@ -21,6 +21,7 @@ interface User {
 export class AdminComponent implements OnInit {
   loading: boolean = false;
   users: User[] = [];
+  adminUser: User | undefined;
 
   constructor(private adminService: AdminService) {}
 
@@ -35,8 +36,10 @@ export class AdminComponent implements OnInit {
     this.adminService.getUserDetails(token).subscribe(
       (response: User[]) => {
         this.loading = false;
-        console.log(response)
-        this.users = response.map(user => ({ ...user, editMode: false }));
+        console.log(response);
+
+        this.adminUser = response.find(user => user.email === 'admin@gmail.com');
+        this.users = response.filter(user => user.email !== 'admin@gmail.com').map(user => ({ ...user, editMode: false }));
       },
       (error: any) => {
         this.loading = false;

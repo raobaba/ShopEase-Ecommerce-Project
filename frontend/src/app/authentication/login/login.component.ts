@@ -39,8 +39,12 @@ export class LoginComponent {
 
           this.loginService.getUserData(token).subscribe(
             (data: any) => {
-              console.log('Endpoint response:', data[data.length-1].email);
-              this.router.navigateByUrl('/');
+              console.log('Endpoint response:', data[data.length - 1].email);
+              if (data[data.length - 1].email === 'admin@gmail.com') {
+                this.router.navigateByUrl('/authorization/admin');
+              } else {
+                this.router.navigateByUrl('/');
+              }
             },
             (error: any) => {
               console.error('Endpoint error:', error);
