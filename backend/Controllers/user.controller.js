@@ -5,21 +5,28 @@ const bcrypt = require("bcrypt");
 const registerUser = async (req, res) => {
   const { fullName, userName, email, password } = req.body;
   try {
-    bcrypt.hash(password, 5, async (err, hash) => {
-      if (err) {
-        console.log(err);
-        res.status(500).json({ success: false, message: 'Error in hashing password' });
-      } else {
-        const user = new UserModel({ fullName, userName, email, password: hash });
-        await user.save();
-        res.status(200).json({ success: true, message: 'Registered' });
-      }
-    });
+    const existingUser = await UserModel.findOne({ email: email });
+    if (existingUser) {
+      // Email is already in use
+      res.status(400).json({ success: false, message: 'This email is already in use. Try to register with another email.' });
+    } else {
+      bcrypt.hash(password, 5, async (err, hash) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ success: false, message: 'Error in hashing password' });
+        } else {
+          const user = new UserModel({ fullName, userName, email, password: hash });
+          await user.save();
+          res.status(200).json({ success: true, message: 'Registered' });
+        }
+      });
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json({ success: false, message: 'Error in registering the user' });
   }
 };
+
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;

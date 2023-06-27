@@ -77,6 +77,9 @@ ul{
 .nav-item-2{
   margin-left: 20%;
 }
+.nav-item-3{
+  margin-top: -8px;
+}
 @media (max-width: 1267.97px) {
   .nav-item-1 {
     padding-left: 5%;
@@ -100,15 +103,15 @@ ul{
     font-size: 12px;
   }
   .nav-item-2{
-    margin-top: -10%;
+    margin-top: -1%;
   }
   .nav-item-3 {
     margin-left: 50%;
-    margin-top: -10%;
+    margin-top: -12%;
   }
   .nav-item-4{
     margin-left: 70%;
-    margin-top: -10%;
+    margin-top: -12%;
   }
   .admin-text{
     display: none;
@@ -139,6 +142,8 @@ ul{
     height: 10px;
   }
 }
+
+
 @media (max-width: 768.98px) {
   .nav-item-2{
     margin-top: 11%;
@@ -210,24 +215,57 @@ ul{
     border: 1px solid black;
   }
 }
-@media (max-width: 280.98px) {
-  .nav-item-2{
-    margin-left: -15%;
+@media (min-width: 375px) and (max-width: 667px) {
+  .nav-item-2 {
+    margin-left: -5%;
     margin-top: 5%;
   }
   .nav-item-3 {
-    margin-left:35%;
-    margin-top: -35%;
+    margin-left: 40%;
+    margin-top: -34%;
   }
-  .nav-item-4{
+  .nav-item-4 {
     margin-left: 70%;
-    margin-top: -40%;
+    margin-top: -30%;
   }
   .navbar {
     display: flex;
     justify-content: space-around;
   }
-  #small-box{
+  #small-box {
+    width: 55%;
+    height: auto;
+    text-align: start;
+    border: 1px solid black;
+  }
+  .navbar-brand {
+    width: 25%;
+    height: 100px;
+    margin-left: 1%;
+  }
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (min-width: 414px) and (max-width: 896px) {
+  .nav-item-2 {
+    margin-left: -5%;
+    margin-top: -5%;
+  }
+  .nav-item-3 {
+    margin-left: 45%;
+    margin-top: -30%;
+  }
+  .nav-item-4 {
+    margin-left: 80%;
+    margin-top: -30%;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-around;
+  }
+  #small-box {
     width: 55%;
     height: auto;
     text-align: start;
@@ -244,6 +282,73 @@ ul{
   }
 }
 
+@media (min-width: 820px) and (max-width: 1180px) {
+  .nav-item-2 {
+    margin-left: 5%;
+    margin-top: 1%;
+  }
+  .nav-item-3 {
+    margin-left: 45%;
+    margin-top: -15%;
+  }
+  .nav-item-4 {
+    margin-left: 80%;
+    margin-top: -15%;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-around;
+  }
+  #small-box {
+    width: 55%;
+    height: auto;
+    text-align: start;
+    border: 1px solid black;
+  }
+  .navbar-brand {
+    width: 25%;
+    height: 100px;
+    margin-left: 1%;
+  }
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .nav-item-2 {
+    margin-left: 5%;
+    margin-top: -10%;
+  }
+  .nav-item-3 {
+    margin-left: 45%;
+    margin-top: -15%;
+  }
+  .nav-item-4 {
+    margin-left: 80%;
+    margin-top: -15%;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-around;
+  }
+  #small-box {
+    width: 55%;
+    height: auto;
+    text-align: start;
+    border: 1px solid black;
+  }
+  .navbar-brand {
+    width: 25%;
+    height: 100px;
+    margin-left: 1%;
+  }
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+}
 
 
 .cart {

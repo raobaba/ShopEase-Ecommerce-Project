@@ -35,8 +35,8 @@ export class AdminComponent implements OnInit {
     this.adminService.getUserDetails(token).subscribe(
       (response: User[]) => {
         this.loading = false;
+        console.log(response)
         this.users = response.map(user => ({ ...user, editMode: false }));
-        console.log(this.users);
       },
       (error: any) => {
         this.loading = false;

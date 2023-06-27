@@ -1,14 +1,15 @@
 .container {
-    margin: 20px;
-    margin: auto;
-  }
-  
-  .user-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
+  margin: auto;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.user-table {
+  width: inherit; /* inherit the width from the parent */
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
   .user-table th, .user-table td {
     padding: 10px;
     text-align: left;
