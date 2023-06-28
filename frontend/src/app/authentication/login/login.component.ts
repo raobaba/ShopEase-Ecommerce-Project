@@ -1,3 +1,4 @@
+// login.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../service/login.service';
@@ -7,6 +8,7 @@ import { LoginService } from '../../service/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent {
   formSubmitted = false;
   userName: string = '';
@@ -18,7 +20,7 @@ export class LoginComponent {
   constructor(
     private loginService: LoginService,
     private router: Router
-  ) { }
+  ) {}
 
   submitForm() {
     this.formSubmitted = true;
@@ -34,15 +36,16 @@ export class LoginComponent {
           alert('LOGIN SUCCESSFUL');
           console.log('API request successful', response);
           const token = response.token;
-          console.log(token);
+          const userID = response.userID;
 
           // Store the token in localStorage
           localStorage.setItem('token', token);
+          localStorage.setItem('userID', userID);
 
-          this.loginService.getUserData(token).subscribe(
+          this.loginService.getUserDataById(token, userID).subscribe(
             (data: any) => {
               console.log('Endpoint response:', response.isAdmin);
-              if (response.isAdmin) {
+              if (data.isAdmin) {
                 this.router.navigateByUrl('/authentication/admin');
               } else {
                 this.loggedIn = true; // Update login status

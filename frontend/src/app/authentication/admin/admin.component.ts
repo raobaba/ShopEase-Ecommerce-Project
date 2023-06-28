@@ -16,6 +16,7 @@ interface User {
   styleUrls: ['./admin.component.css'],
   providers: [AdminService] // Add the service provider
 })
+
 export class AdminComponent implements OnInit {
   loading: boolean = false;
   users: User[] = [];
@@ -31,6 +32,7 @@ export class AdminComponent implements OnInit {
     this.loading = true;
 
     const token = localStorage.getItem('token') || '';
+    
     this.adminService.getUserDetails(token).subscribe(
       (response: User[]) => {
         this.loading = false;

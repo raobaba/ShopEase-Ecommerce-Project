@@ -39,7 +39,7 @@ const loginUser = async (req, res) => {
           const token = jwt.sign({ userID: user._id, isAdmin: user.isAdmin }, process.env.key);
           // Set the token in the response headers
           res.setHeader('Authorization', `Bearer ${token}`);
-          res.status(200).json({ success: true, message: 'Login Successful', token });
+          res.status(200).json({ success: true, message: 'Login Successful', token, userID: user._id });
         } else {
           res.status(401).json({ success: false, message: 'Wrong Credentials' });
         }
@@ -52,6 +52,7 @@ const loginUser = async (req, res) => {
     res.status(500).json({ success: false, message: 'Something went wrong' });
   }
 };
+
 
 
 const getUser = async (req, res) => {

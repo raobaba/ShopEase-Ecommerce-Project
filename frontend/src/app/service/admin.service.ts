@@ -5,9 +5,10 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AdminService {
   constructor(private http: HttpClient) {}
-
+  
   getUserDetails(token: string): Observable<User[]> {
     const headers = new HttpHeaders().set('Authorization', token);
     return this.http.get<User[]>('http://localhost:8080/getUser', { headers });

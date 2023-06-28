@@ -19,11 +19,13 @@ export class NavbarComponent implements OnInit {
 
   checkAdminVisibility() {
     const token = localStorage.getItem('token');
+    const userID = localStorage.getItem('userID')!; // Add '!' to assert that it won't be null
+
     if (token) {
-      this.loginService.getUserData(token).subscribe(
+      this.loginService.getUserDataById(token, userID).subscribe(
         (data: any) => {
-          console.log(data)
-          if (data[data.length-1] && data[data.length-1].email === 'admin@gmail.com') {
+          console.log(data);
+          if (data.isAdmin) {
             this.isAdminVisible = true;
           }
         },
@@ -42,13 +44,18 @@ export class NavbarComponent implements OnInit {
   toggleSubMenu() {
     this.isSubMenuOpen = !this.isSubMenuOpen;
   }
+
   isDropdownOpen = false;
   cartItemCount: number = 1;
-  cartStatus = this.cartItemCount>0 ? `There are currently ${this.cartItemCount} items in your cart`
-  :`There are currently no items in your cart` 
+  cartStatus =
+    this.cartItemCount > 0
+      ? `There are currently ${this.cartItemCount} items in your cart`
+      : `There are currently no items in your cart`;
+
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+
   updateCartItemCount(newCount: number): void {
     this.cartItemCount = newCount;
   }
