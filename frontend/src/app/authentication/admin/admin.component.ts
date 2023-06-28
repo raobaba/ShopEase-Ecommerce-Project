@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { AdminService } from '../../service/admin.service';
 
 interface User {
@@ -36,8 +34,6 @@ export class AdminComponent implements OnInit {
     this.adminService.getUserDetails(token).subscribe(
       (response: User[]) => {
         this.loading = false;
-        console.log(response);
-
         this.adminUser = response.find(user => user.email === 'admin@gmail.com');
         this.users = response.filter(user => user.email !== 'admin@gmail.com').map(user => ({ ...user, editMode: false }));
       },

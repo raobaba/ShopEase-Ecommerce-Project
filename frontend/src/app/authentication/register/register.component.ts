@@ -13,13 +13,15 @@ export class RegisterComponent {
   userName: string = '';
   email: string = '';
   password: string = '';
+  isAdmin: boolean = false;
 
-  constructor(private registerService: RegisterService, private router:Router) { }
+  constructor(private registerService: RegisterService, private router: Router) {}
 
   submitForm() {
     this.formSubmitted = true;
 
-    this.registerService.registerUser(this.fullName, this.userName, this.email, this.password)
+    this.registerService
+      .registerUser(this.fullName, this.userName, this.email, this.password, this.isAdmin)
       .subscribe(
         (response: any) => {
           if (response && response.success) {

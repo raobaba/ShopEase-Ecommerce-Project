@@ -1,7 +1,7 @@
 <div class="container">
   <form (ngSubmit)="submitForm()" #form="ngForm">
     <div class="form-group">
-      <label for="fullName"><span class="required">*</span>Full Name </label>
+      <label for="fullName"><span class="required">*</span>Full Name</label>
       <input type="text" id="fullName" class="form-control" name="fullName" required [(ngModel)]="fullName"
         #fullNameInput="ngModel">
       <div style="font-size: 10px;" *ngIf="fullNameInput.touched && fullNameInput.invalid || (formSubmitted && fullNameInput.invalid)"
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="userName"><span class="required">*</span>User Name </label>
+      <label for="userName"><span class="required">*</span>User Name</label>
       <input type="text" id="userName" class="form-control" name="userName" required [(ngModel)]="userName"
         #userNameInput="ngModel">
       <div style="font-size: 10px;" *ngIf="userNameInput.touched && userNameInput.invalid || (formSubmitted && userNameInput.invalid)"
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="email"><span class="required">*</span>Email </label>
+      <label for="email"><span class="required">*</span>Email</label>
       <input type="email" id="email" class="form-control" name="email" required [(ngModel)]="email" #emailInput="ngModel">
       <div style="font-size: 10px;" *ngIf="emailInput.touched && emailInput.invalid || (formSubmitted && emailInput.invalid)"
         class="alert alert-danger alert-text">
@@ -27,13 +27,17 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="password"><span class="required">*</span>Password </label>
+      <label for="password"><span class="required">*</span>Password</label>
       <input type="password" id="password" class="form-control" name="password" required [(ngModel)]="password"
         #passwordInput="ngModel">
       <div style="font-size: 10px;" *ngIf="passwordInput.touched && passwordInput.invalid || (formSubmitted && passwordInput.invalid)"
         class="alert alert-danger alert-text">
         Password is required.
       </div>
+    </div>
+    <div class="form-group">
+      <label style="padding: 10px;" for="isAdmin">isAdmin</label>
+      <input type="checkbox" id="isAdmin" name="isAdmin" [(ngModel)]="isAdmin">
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
     <div class="login-link">

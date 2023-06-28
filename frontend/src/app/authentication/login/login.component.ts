@@ -12,6 +12,8 @@ export class LoginComponent {
   userName: string = '';
   email: string = '';
   password: string = '';
+  loggedIn = false; // New property to track login status
+  userEmail: string = ''; // New property to store logged-in user email
 
   constructor(
     private loginService: LoginService,
@@ -39,10 +41,12 @@ export class LoginComponent {
 
           this.loginService.getUserData(token).subscribe(
             (data: any) => {
-              console.log('Endpoint response:', data[data.length - 1].email);
-              if (data[data.length - 1].email === 'admin@gmail.com') {
+              console.log('Endpoint response:', response.isAdmin);
+              if (response.isAdmin) {
                 this.router.navigateByUrl('/authentication/admin');
               } else {
+                this.loggedIn = true; // Update login status
+                this.userEmail = data[data.length - 1].email; // Store logged-in user email
                 this.router.navigateByUrl('/');
               }
             },
@@ -66,6 +70,12 @@ export class LoginComponent {
         }
       }
     );
+  }
+
+  logout() {
+    localStorage.removeItem('token'); // Clear the stored token
+    this.loggedIn = false; // Update login status
+    this.userEmail = ''; // Clear logged-in user email
   }
 
   private handleLoginError() {

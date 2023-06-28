@@ -6,8 +6,14 @@
     <span class="account-text">Account</span>
   </div>
   <div class="account-dropdown" [ngClass]="{'open': isDropdownOpen}" (mouseleave)="toggleDropdown()">
-    <button routerLink="/authentication/login">Login</button>
-    <button routerLink="/authentication/register">Register</button>
+    <ng-container *ngIf="!loggedIn">
+      <button routerLink="/authentication/login">Login</button>
+      <button routerLink="/authentication/register">Register</button>
+    </ng-container>
+    <ng-container *ngIf="loggedIn">
+      <button (click)="logout()">Logout</button>
+       <button> <div>{{ userEmail }}</div></button>
+    </ng-container>
     <button>Wishlist</button>
     <button>Your Orders</button>
     <button>Your Referrals</button>

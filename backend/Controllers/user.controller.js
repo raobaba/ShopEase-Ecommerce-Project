@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const registerUser = async (req, res) => {
-  const { fullName, userName, email, password } = req.body;
+  const { fullName, userName, email, password, isAdmin } = req.body;
   try {
     const existingUser = await UserModel.findOne({ email: email });
     if (existingUser) {
@@ -15,7 +15,7 @@ const registerUser = async (req, res) => {
           console.log(err);
           res.status(500).json({ success: false, message: 'Error in hashing password' });
         } else {
-          const user = new UserModel({ fullName, userName, email, password: hash });
+          const user = new UserModel({ fullName, userName, email, password: hash, isAdmin }); // Include isAdmin field
           await user.save();
           res.status(200).json({ success: true, message: 'Registered' });
         }
@@ -28,6 +28,7 @@ const registerUser = async (req, res) => {
 };
 
 
+
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -35,7 +36,7 @@ const loginUser = async (req, res) => {
     if (user) {
       bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
-          const token = jwt.sign({ userID: user._id }, process.env.key);
+          const token = jwt.sign({ userID: user._id, isAdmin: user.isAdmin }, process.env.key);
           // Set the token in the response headers
           res.setHeader('Authorization', `Bearer ${token}`);
           res.status(200).json({ success: true, message: 'Login Successful', token });
@@ -62,30 +63,50 @@ const getUser = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to fetch users" });
   }
 };
+const getUserById = async (req, res) => {
+  const userId = req.params.userId; // Assuming the user ID is provided in the request parameters
+
+  try {
+    const user = await UserModel.findById(userId, { password: 0 }); // Exclude the password field from the query result
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, message: "Failed to fetch user" });
+  }
+};
+
 
 const updateUser = async (req, res) => {
-  const { fullName, userName, email, password } = req.body;
+  const { fullName, userName, email, password, isAdmin } = req.body;
   try {
     const user = await UserModel.findById(req.params.userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
+
     user.fullName = fullName;
     user.userName = userName;
     user.email = email;
+    user.isAdmin = isAdmin;
+
     if (password) {
       const hashedPassword = await bcrypt.hash(password, 5);
       user.password = hashedPassword;
     }
-    await user.save();
-    res.status(200).json({ message: "User updated successfully" });
+
+    const updatedUser = await user.save();
+
+    res.status(200).json({ message: "User updated successfully", user: updatedUser });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Failed to update user" });
   }
 };
 
-  
+
 const deleteUser = async (req, res) => {
   try {
     const user = await UserModel.findByIdAndDelete(req.params.userId);
@@ -99,11 +120,11 @@ const deleteUser = async (req, res) => {
   }
 };
 
-  
   module.exports = {
     registerUser,
     loginUser,
     getUser,
+    getUserById,
     updateUser,
     deleteUser,
   };

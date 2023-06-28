@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     if (token) {
       this.loginService.getUserData(token).subscribe(
         (data: any) => {
-          console.log(data[data.length-1].email)
+          console.log(data)
           if (data[data.length-1] && data[data.length-1].email === 'admin@gmail.com') {
             this.isAdminVisible = true;
           }
