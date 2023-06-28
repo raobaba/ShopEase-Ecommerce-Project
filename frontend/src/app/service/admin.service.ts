@@ -2,12 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+interface User {
+  _id: string;
+  fullName: string;
+  userName: string;
+  email: string;
+  password: string;
+  editMode: boolean; // New property to track edit mode
+}
+
 @Injectable({
   providedIn: 'root'
 })
-
 export class AdminService {
   constructor(private http: HttpClient) {}
+
+  getUserDataById(token: string, userID: string) {
+    const headers = new HttpHeaders().set('Authorization', token);
+    return this.http.get(`http://localhost:8080/${userID}`, { headers });
+  }
   
   getUserDetails(token: string): Observable<User[]> {
     const headers = new HttpHeaders().set('Authorization', token);
@@ -32,13 +45,4 @@ export class AdminService {
     const headers = new HttpHeaders().set('Authorization', token);
     return this.http.delete<void>(`http://localhost:8080/${_id}`, { headers }).toPromise();
   }
-}
-
-interface User {
-  _id: string;
-  fullName: string;
-  userName: string;
-  email: string;
-  password: string;
-  editMode: boolean; // New property to track edit mode
 }

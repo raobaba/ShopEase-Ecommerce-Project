@@ -1,10 +1,11 @@
 <div class="container">
   <div *ngIf="loading" class="loading-message">Loading...</div>
-  <div *ngIf="adminUser">
+  <div *ngIf="adminUser && adminUser.isAdmin">
     <h1>{{ adminUser.fullName }} (Admin)</h1>
-    <p><strong>User Name:</strong> {{ adminUser.userName }}</p>
-    <p><strong>Email:</strong> {{ adminUser.email }}</p>
+    <!-- <p><strong>User Name:</strong> {{ adminUser.userName }}</p>
+    <p><strong>Email:</strong> {{ adminUser.email }}</p> -->
   </div>
+  
   <h1>User Details</h1>
   <div *ngIf="users.length > 0">
     <table class="user-table">

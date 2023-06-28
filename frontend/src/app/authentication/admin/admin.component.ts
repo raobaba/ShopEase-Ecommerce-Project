@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../service/admin.service';
+import { LoginService } from 'src/app/service/login.service';
 
 interface User {
+  isAdmin: boolean;
   _id: string;
   fullName: string;
   userName: string;
@@ -16,28 +18,47 @@ interface User {
   styleUrls: ['./admin.component.css'],
   providers: [AdminService] // Add the service provider
 })
-
 export class AdminComponent implements OnInit {
   loading: boolean = false;
   users: User[] = [];
   adminUser: User | undefined;
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, private loginService: LoginService) {}
 
   ngOnInit() {
     this.getUserDetails();
+    this.getUserDataById();
+  }
+
+  getUserDataById() {
+    const token = localStorage.getItem('token') || '';
+    const userID = localStorage.getItem('userID') || '';
+
+    this.loginService.getUserDataById(token, userID).subscribe(
+      (response: any) => {
+        console.log(response);
+        if (response.isAdmin) {
+          this.adminUser = response;
+        }
+      },
+      (error: any) => {
+        console.error('Failed to get user data by ID', error);
+      }
+    );
   }
 
   getUserDetails() {
     this.loading = true;
 
     const token = localStorage.getItem('token') || '';
-    
+
     this.adminService.getUserDetails(token).subscribe(
-      (response: User[]) => {
+      (response: any) => {
+        console.log(response);
         this.loading = false;
-        this.adminUser = response.find(user => user.email === 'admin@gmail.com');
-        this.users = response.filter(user => user.email !== 'admin@gmail.com').map(user => ({ ...user, editMode: false }));
+        this.users = response
+          .filter((user: User) => !user.isAdmin)
+          .map((user: User) => ({ ...user, editMode: false }));
       },
       (error: any) => {
         this.loading = false;
@@ -65,7 +86,7 @@ export class AdminComponent implements OnInit {
     try {
       const token = localStorage.getItem('token') || '';
       await this.adminService.deleteUser(token, user);
-      this.users = this.users.filter(u => u._id !== user._id);
+      this.users = this.users.filter((u: User) => u._id !== user._id);
       console.log('User deleted successfully');
     } catch (error) {
       console.error('Failed to delete user', error);
