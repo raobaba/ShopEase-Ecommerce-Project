@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '.././service/login.service';
+import { CombinedService } from '.././service/combine.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
   isSubMenuOpen: boolean = false;
   isAdminVisible: boolean = false;
 
-  constructor(private loginService: LoginService) {}
+  constructor(private combinedService: CombinedService) {}
 
   ngOnInit() {
     this.checkAdminVisibility();
@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     const userID = localStorage.getItem('userID')!; // Add '!' to assert that it won't be null
 
     if (token) {
-      this.loginService.getUserDataById(token, userID).subscribe(
+      this.combinedService.getUserDataById(token, userID).subscribe(
         (data: any) => {
           console.log(data);
           if (data.isAdmin) {

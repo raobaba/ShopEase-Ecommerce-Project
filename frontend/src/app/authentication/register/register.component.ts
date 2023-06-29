@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterService } from '../../service/register.service';
+import { CombinedService } from '../../service/combine.service';
 
 @Component({
   selector: 'app-register',
@@ -15,12 +15,12 @@ export class RegisterComponent {
   password: string = '';
   isAdmin: boolean = false;
 
-  constructor(private registerService: RegisterService, private router: Router) {}
+  constructor(private combinedService: CombinedService, private router: Router) {}
 
   submitForm() {
     this.formSubmitted = true;
 
-    this.registerService
+    this.combinedService
       .registerUser(this.fullName, this.userName, this.email, this.password, this.isAdmin)
       .subscribe(
         (response: any) => {

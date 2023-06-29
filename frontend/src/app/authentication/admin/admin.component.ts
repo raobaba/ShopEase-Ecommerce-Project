@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../service/admin.service';
-import { LoginService } from 'src/app/service/login.service';
+import { CombinedService } from '../../service/combine.service';
 
 interface User {
   isAdmin: boolean;
@@ -16,14 +15,14 @@ interface User {
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
-  providers: [AdminService] 
+  providers: [CombinedService] 
 })
 export class AdminComponent implements OnInit {
   loading: boolean = false;
   users: User[] = [];
   adminUser: User | undefined;
 
-  constructor(private adminService: AdminService, private loginService: LoginService) {}
+  constructor(private combinedService: CombinedService, private CombinedService: CombinedService) {}
 
   ngOnInit() {
     this.getUserDetails();
@@ -34,7 +33,7 @@ export class AdminComponent implements OnInit {
     const token = localStorage.getItem('token') || '';
     const userID = localStorage.getItem('userID') || '';
 
-    this.loginService.getUserDataById(token, userID).subscribe(
+    this.combinedService.getUserDataById(token, userID).subscribe(
       (response: any) => {
         if (response.isAdmin) {
           this.adminUser = response;
@@ -51,7 +50,7 @@ export class AdminComponent implements OnInit {
 
     const token = localStorage.getItem('token') || '';
 
-    this.adminService.getUserDetails(token).subscribe(
+    this.combinedService.getUserDetails(token).subscribe(
       (response: any) => {
         console.log(response);
         this.loading = false;
@@ -73,7 +72,7 @@ export class AdminComponent implements OnInit {
   async updateUser(user: User) {
     try {
       const token = localStorage.getItem('token') || '';
-      await this.adminService.updateUser(token, user);
+      await this.combinedService.updateUser(token, user);
       user.editMode = false;
       console.log('User updated successfully');
     } catch (error) {
@@ -84,7 +83,7 @@ export class AdminComponent implements OnInit {
   async deleteUser(user: User) {
     try {
       const token = localStorage.getItem('token') || '';
-      await this.adminService.deleteUser(token, user);
+      await this.combinedService.deleteUser(token, user);
       this.users = this.users.filter((u: User) => u._id !== user._id);
       console.log('User deleted successfully');
     } catch (error) {

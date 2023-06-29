@@ -1,7 +1,7 @@
 // login.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../service/login.service';
+import { CombinedService } from '../../service/combine.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent {
   userEmail: string = ''; 
 
   constructor(
-    private loginService: LoginService,
+    private combinedService: CombinedService,
     private router: Router
   ) {}
   submitForm() {
@@ -28,7 +28,7 @@ export class LoginComponent {
       email: this.email,
       password: this.password
     };
-    this.loginService.loginUser(formData).subscribe(
+    this.combinedService.loginUser(formData).subscribe(
       (response: any) => {
         if (response && response.success) {
           alert('LOGIN SUCCESSFUL');
@@ -37,7 +37,7 @@ export class LoginComponent {
           const userID = response.userID;
           localStorage.setItem('token', token);
           localStorage.setItem('userID', userID);
-          this.loginService.getUserDataById(token, userID).subscribe(
+          this.combinedService.getUserDataById(token, userID).subscribe(
             (data: any) => {
               console.log('Endpoint response:', data.isAdmin);
               if (data.isAdmin) {
