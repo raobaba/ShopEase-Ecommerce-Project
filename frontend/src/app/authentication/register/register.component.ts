@@ -27,7 +27,7 @@ export class RegisterComponent {
           if (response && response.success) {
             alert('SIGNUP SUCCESSFUL');
             console.log('API request successful', response);
-            this.router.navigate(['/authentication/login']); // Redirect to login page
+            this.router.navigate(['/authentication/login']);
           } else {
             this.handleRegistrationError();
             console.error('API request error', response);

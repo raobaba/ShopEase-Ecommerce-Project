@@ -14,8 +14,8 @@ export class LoginComponent {
   userName: string = '';
   email: string = '';
   password: string = '';
-  loggedIn = false; // New property to track login status
-  userEmail: string = ''; // New property to store logged-in user email
+  loggedIn = false;
+  userEmail: string = ''; 
 
   constructor(
     private loginService: LoginService,
@@ -38,18 +38,18 @@ export class LoginComponent {
           const token = response.token;
           const userID = response.userID;
 
-          // Store the token in localStorage
           localStorage.setItem('token', token);
           localStorage.setItem('userID', userID);
 
           this.loginService.getUserDataById(token, userID).subscribe(
             (data: any) => {
-              console.log('Endpoint response:', response.isAdmin);
+              console.log('Endpoint response:', data.isAdmin);
               if (data.isAdmin) {
                 this.router.navigateByUrl('/authentication/admin');
               } else {
-                this.loggedIn = true; // Update login status
-                this.userEmail = data[data.length - 1].email; // Store logged-in user email
+                this.loggedIn = true; 
+                this.userEmail = data.email; 
+                console.log(this.userEmail)
                 this.router.navigateByUrl('/');
               }
             },
@@ -76,9 +76,9 @@ export class LoginComponent {
   }
 
   logout() {
-    localStorage.removeItem('token'); // Clear the stored token
-    this.loggedIn = false; // Update login status
-    this.userEmail = ''; // Clear logged-in user email
+    localStorage.removeItem('token'); 
+    this.loggedIn = false; 
+    this.userEmail = ''; 
   }
 
   private handleLoginError() {

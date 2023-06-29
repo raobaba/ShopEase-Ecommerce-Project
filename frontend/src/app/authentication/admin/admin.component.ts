@@ -9,14 +9,14 @@ interface User {
   userName: string;
   email: string;
   password: string;
-  editMode: boolean; // New property to track edit mode
+  editMode: boolean; 
 }
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
-  providers: [AdminService] // Add the service provider
+  providers: [AdminService] 
 })
 export class AdminComponent implements OnInit {
   loading: boolean = false;
@@ -36,7 +36,6 @@ export class AdminComponent implements OnInit {
 
     this.loginService.getUserDataById(token, userID).subscribe(
       (response: any) => {
-        console.log(response);
         if (response.isAdmin) {
           this.adminUser = response;
         }

@@ -8,9 +8,9 @@ import { LoginService } from '.././service/login.service';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent {
-  isDropdownOpen = false; // Add property to track dropdown state
-  loggedIn = false; // New property to track login status
-  userEmail: string = ''; // New property to store logged-in user email
+  isDropdownOpen = false; 
+  loggedIn = false;
+  userEmail: string = ''; 
 
   constructor(private loginService: LoginService, private router: Router) {}
 
@@ -20,11 +20,17 @@ export class AccountComponent {
 
   ngOnInit() {
     const token = localStorage.getItem('token');
-    if (token) {
+    const userID = localStorage.getItem('userID'); // Get the userID from localStorage
+
+    if (token && userID) {
       this.loggedIn = true;
-      this.loginService.getUserData(token).subscribe(
+      this.loginService.getUserDataById(token, userID).subscribe(
         (data: any) => {
-          this.userEmail = data[data.length - 1].email;
+          if (data.isAdmin) { 
+            this.userEmail = data.email;
+          } else {
+            console.log('User is not an admin.');
+          }
         },
         (error: any) => {
           console.error('Endpoint error:', error);
@@ -34,9 +40,10 @@ export class AccountComponent {
   }
 
   logout() {
-    localStorage.removeItem('token'); // Clear the stored token
-    this.loggedIn = false; // Update login status
-    this.userEmail = ''; // Clear logged-in user email
-    this.router.navigate(['/']); // Navigate to the root route
+    localStorage.removeItem('token'); 
+    localStorage.removeItem('userID'); 
+    this.loggedIn = false; 
+    this.userEmail = ''; 
+    this.router.navigate(['/']); 
   }
 }
