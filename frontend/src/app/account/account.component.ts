@@ -29,6 +29,7 @@ export class AccountComponent {
           if (data.isAdmin) { 
             this.userEmail = data.email;
           } else {
+            this.userEmail = data.email;
             console.log('User is not an admin.');
           }
         },

@@ -21,7 +21,6 @@ export class LoginComponent {
     private loginService: LoginService,
     private router: Router
   ) {}
-
   submitForm() {
     this.formSubmitted = true;
     const formData = {
@@ -29,7 +28,6 @@ export class LoginComponent {
       email: this.email,
       password: this.password
     };
-
     this.loginService.loginUser(formData).subscribe(
       (response: any) => {
         if (response && response.success) {
@@ -37,10 +35,8 @@ export class LoginComponent {
           console.log('API request successful', response);
           const token = response.token;
           const userID = response.userID;
-
           localStorage.setItem('token', token);
           localStorage.setItem('userID', userID);
-
           this.loginService.getUserDataById(token, userID).subscribe(
             (data: any) => {
               console.log('Endpoint response:', data.isAdmin);
