@@ -11,22 +11,20 @@ export class NavbarComponent implements OnInit {
   isMenuOpen: boolean = false;
   isSubMenuOpen: boolean = false;
   isAdminVisible: boolean = false;
-  loggedIn:boolean = false;
+  loggedIn: boolean = false;
+
   constructor(
     private combinedService: CombinedService,
     private sharedService: SharedService
-    ) {}
+  ) {}
 
-    ngOnInit() {
-      this.checkAdminVisibility();
-      this.sharedService.isAdmin$.subscribe((isAdmin: boolean) => {
-        this.isAdminVisible = isAdmin;
-      });
-      this.checkLoginStatus();
-      this.sharedService.loggedIn$.subscribe((loggedIn: boolean) => {
-        this.loggedIn = loggedIn;
-      });
-    }
+  ngOnInit() {
+    this.checkAdminVisibility();
+    this.sharedService.isAdmin$.subscribe((isAdmin: boolean) => {
+      this.isAdminVisible = isAdmin;
+    });
+  }
+
 
   checkAdminVisibility() {
     const token = localStorage.getItem('token');
@@ -36,9 +34,8 @@ export class NavbarComponent implements OnInit {
       this.combinedService.getUserDataById(token, userID).subscribe(
         (data: any) => {
           console.log(data);
-          console.log('Navbar',data.isAdmin)
+          console.log('Navbar', data.isAdmin);
           if (data.isAdmin) {
-            this.sharedService.setLoggedInStatus(true);
             this.isAdminVisible = true;
             this.sharedService.setAdminStatus(true);
           }
@@ -49,17 +46,7 @@ export class NavbarComponent implements OnInit {
       );
     }
   }
-  
 
-  checkLoginStatus() {
-    const token = localStorage.getItem('token');
-    const userID = localStorage.getItem('userID');
-  
-    if (userID && token) {
-      this.sharedService.setLoggedInStatus(true);
-    }
-  }
-  
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.isSubMenuOpen = false;

@@ -13,8 +13,14 @@ export class SharedService {
   setAdminStatus(isAdmin: boolean) {
     this.isAdminSubject.next(isAdmin);
   }
+  
   setLoggedInStatus(loggedIn: boolean) {
     this.loggedInSubject.next(loggedIn);
   }
+
+  getLoggedInStatus() {
+    return this.loggedInSubject.getValue();
+  }
+
   constructor() { }
 }

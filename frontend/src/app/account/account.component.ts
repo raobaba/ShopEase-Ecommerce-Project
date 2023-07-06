@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '.././service/login.service';
+import { CombinedService } from '.././service/combine.service';
 import { SharedService } from '../service/shared.service';
 
 @Component({
@@ -8,15 +8,15 @@ import { SharedService } from '../service/shared.service';
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
-export class AccountComponent {
+export class AccountComponent implements OnInit {
   isDropdownOpen = false;
   loggedIn = false;
   userEmail: string = '';
 
   constructor(
-     private loginService: LoginService,
-     private router: Router,
-     private sharedService: SharedService
+    private combinedService: CombinedService,
+    private router: Router,
+    private sharedService: SharedService
   ) {}
 
   toggleDropdown() {
@@ -24,22 +24,50 @@ export class AccountComponent {
   }
 
   ngOnInit() {
+    this.loadUserData();
+    this.checkLoginStatus();
+    this.sharedService.loggedIn$.subscribe((loggedIn: boolean) => {
+      this.loggedIn = loggedIn;
+      if (loggedIn) {
+        this.loadUserEmail();
+      } else {
+        this.userEmail = '';
+      }
+    });
+  }
+
+  checkLoginStatus() {
+    this.loggedIn = this.sharedService.getLoggedInStatus();
+  }
+
+  loadUserData() {
     const token = localStorage.getItem('token');
     const userID = localStorage.getItem('userID'); // Get the userID from localStorage
 
     if (token && userID) {
-      this.loggedIn = true;
-      this.loginService.getUserDataById(token, userID).subscribe(
+      this.combinedService.getUserDataById(token, userID).subscribe(
         (data: any) => {
           if (data.isAdmin) {
-            this.userEmail = data.email;
             this.sharedService.setAdminStatus(true);
-            this.sharedService.setLoggedInStatus(true);
-          } else {
-            this.userEmail = data.email;
-            console.log('User is not an admin.');
-            this.sharedService.setLoggedInStatus(true);
           }
+          this.sharedService.setLoggedInStatus(true);
+          this.loggedIn = true;
+        },
+        (error: any) => {
+          console.error('Endpoint error:', error);
+        }
+      );
+    }
+  }
+
+  loadUserEmail() {
+    const token = localStorage.getItem('token');
+    const userID = localStorage.getItem('userID'); // Get the userID from localStorage
+
+    if (token && userID) {
+      this.combinedService.getUserDataById(token, userID).subscribe(
+        (data: any) => {
+          this.userEmail = data.email;
         },
         (error: any) => {
           console.error('Endpoint error:', error);

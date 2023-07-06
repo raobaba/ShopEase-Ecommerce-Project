@@ -44,17 +44,10 @@ export class LoginComponent {
               if (data.isAdmin) {
                 console.log("Login", data.isAdmin);
                 this.sharedService.setAdminStatus(true); // Set admin status
-                this.sharedService.setLoggedInStatus(true);
-                console.log("Login status",this.sharedService.setLoggedInStatus(true))
-                this.router.navigateByUrl('/authentication/admin');
-              } else {
-                this.loggedIn = true; 
-                this.sharedService.setLoggedInStatus(true);
-                this.userEmail = data.email; 
-                console.log(this.userEmail);
-                console.log("Login status",this.sharedService.setLoggedInStatus(true))
-                this.router.navigateByUrl('/');
               }
+              this.sharedService.setLoggedInStatus(true);
+              console.log("Login status", this.sharedService.getLoggedInStatus());
+              this.router.navigateByUrl(data.isAdmin ? '/authentication/admin' : '/');
             },
             (error: any) => {
               console.error('Endpoint error:', error);
@@ -80,8 +73,8 @@ export class LoginComponent {
 
   logout() {
     localStorage.removeItem('token'); 
-    this.loggedIn = false; 
-    this.userEmail = ''; 
+    this.sharedService.setLoggedInStatus(false);
+    this.router.navigateByUrl('/');
   }
 
   private handleLoginError() {
