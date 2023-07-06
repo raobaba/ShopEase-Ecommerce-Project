@@ -1,14 +1,13 @@
-// login.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CombinedService } from '../../service/combine.service';
+import { SharedService } from '../../service/shared.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent {
   formSubmitted = false;
   userName: string = '';
@@ -19,8 +18,10 @@ export class LoginComponent {
 
   constructor(
     private combinedService: CombinedService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService
   ) {}
+
   submitForm() {
     this.formSubmitted = true;
     const formData = {
@@ -41,11 +42,17 @@ export class LoginComponent {
             (data: any) => {
               console.log('Endpoint response:', data.isAdmin);
               if (data.isAdmin) {
+                console.log("Login", data.isAdmin);
+                this.sharedService.setAdminStatus(true); // Set admin status
+                this.sharedService.setLoggedInStatus(true);
+                console.log("Login status",this.sharedService.setLoggedInStatus(true))
                 this.router.navigateByUrl('/authentication/admin');
               } else {
                 this.loggedIn = true; 
+                this.sharedService.setLoggedInStatus(true);
                 this.userEmail = data.email; 
-                console.log(this.userEmail)
+                console.log(this.userEmail);
+                console.log("Login status",this.sharedService.setLoggedInStatus(true))
                 this.router.navigateByUrl('/');
               }
             },

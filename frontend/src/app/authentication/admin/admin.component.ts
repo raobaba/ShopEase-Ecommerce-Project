@@ -35,6 +35,7 @@ export class AdminComponent implements OnInit {
 
     this.combinedService.getUserDataById(token, userID).subscribe(
       (response: any) => {
+        console.log("Admin",response.isAdmin)
         if (response.isAdmin) {
           this.adminUser = response;
         }
@@ -47,9 +48,7 @@ export class AdminComponent implements OnInit {
 
   getUserDetails() {
     this.loading = true;
-
     const token = localStorage.getItem('token') || '';
-
     this.combinedService.getUserDetails(token).subscribe(
       (response: any) => {
         console.log(response);

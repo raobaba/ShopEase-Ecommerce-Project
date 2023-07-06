@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CombinedService } from '.././service/combine.service';
+import { SharedService } from '.././service/shared.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,12 +11,22 @@ export class NavbarComponent implements OnInit {
   isMenuOpen: boolean = false;
   isSubMenuOpen: boolean = false;
   isAdminVisible: boolean = false;
+  loggedIn:boolean = false;
+  constructor(
+    private combinedService: CombinedService,
+    private sharedService: SharedService
+    ) {}
 
-  constructor(private combinedService: CombinedService) {}
-
-  ngOnInit() {
-    this.checkAdminVisibility();
-  }
+    ngOnInit() {
+      this.checkAdminVisibility();
+      this.sharedService.isAdmin$.subscribe((isAdmin: boolean) => {
+        this.isAdminVisible = isAdmin;
+      });
+      this.checkLoginStatus();
+      this.sharedService.loggedIn$.subscribe((loggedIn: boolean) => {
+        this.loggedIn = loggedIn;
+      });
+    }
 
   checkAdminVisibility() {
     const token = localStorage.getItem('token');
@@ -25,8 +36,11 @@ export class NavbarComponent implements OnInit {
       this.combinedService.getUserDataById(token, userID).subscribe(
         (data: any) => {
           console.log(data);
+          console.log('Navbar',data.isAdmin)
           if (data.isAdmin) {
+            this.sharedService.setLoggedInStatus(true);
             this.isAdminVisible = true;
+            this.sharedService.setAdminStatus(true);
           }
         },
         (error: any) => {
@@ -35,7 +49,17 @@ export class NavbarComponent implements OnInit {
       );
     }
   }
+  
 
+  checkLoginStatus() {
+    const token = localStorage.getItem('token');
+    const userID = localStorage.getItem('userID');
+  
+    if (userID && token) {
+      this.sharedService.setLoggedInStatus(true);
+    }
+  }
+  
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.isSubMenuOpen = false;

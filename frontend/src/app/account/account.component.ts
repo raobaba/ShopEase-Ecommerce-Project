@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '.././service/login.service';
+import { SharedService } from '../service/shared.service';
 
 @Component({
   selector: 'app-account',
@@ -8,11 +9,15 @@ import { LoginService } from '.././service/login.service';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent {
-  isDropdownOpen = false; 
+  isDropdownOpen = false;
   loggedIn = false;
-  userEmail: string = ''; 
+  userEmail: string = '';
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+     private loginService: LoginService,
+     private router: Router,
+     private sharedService: SharedService
+  ) {}
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -26,11 +31,14 @@ export class AccountComponent {
       this.loggedIn = true;
       this.loginService.getUserDataById(token, userID).subscribe(
         (data: any) => {
-          if (data.isAdmin) { 
+          if (data.isAdmin) {
             this.userEmail = data.email;
+            this.sharedService.setAdminStatus(true);
+            this.sharedService.setLoggedInStatus(true);
           } else {
             this.userEmail = data.email;
             console.log('User is not an admin.');
+            this.sharedService.setLoggedInStatus(true);
           }
         },
         (error: any) => {
@@ -41,10 +49,12 @@ export class AccountComponent {
   }
 
   logout() {
-    localStorage.removeItem('token'); 
-    localStorage.removeItem('userID'); 
-    this.loggedIn = false; 
-    this.userEmail = ''; 
-    this.router.navigate(['/']); 
+    localStorage.removeItem('token');
+    localStorage.removeItem('userID');
+    this.loggedIn = false;
+    this.sharedService.setAdminStatus(false);
+    this.sharedService.setLoggedInStatus(false);
+    this.userEmail = '';
+    this.router.navigate(['/authentication/login']);
   }
 }
