@@ -57,10 +57,11 @@ export class NavbarComponent implements OnInit {
   }
 
   isDropdownOpen = false;
-  cartItemCount: number = 1;
+  cartItemCount: number = 0;
   cartStatus =
-    this.cartItemCount > 0
+    this.cartItemCount > 1
       ? `There are currently ${this.cartItemCount} items in your cart`
+      :this.cartItemCount===1 ? `There is Currenty ${this.cartItemCount} item in you cart `
       : `There are currently no items in your cart`;
 
   toggleDropdown() {
