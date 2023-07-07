@@ -25,7 +25,6 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-
   checkAdminVisibility() {
     const token = localStorage.getItem('token');
     const userID = localStorage.getItem('userID')!; // Add '!' to assert that it won't be null
