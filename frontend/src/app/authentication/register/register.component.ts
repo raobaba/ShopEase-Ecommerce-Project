@@ -9,6 +9,7 @@ import { CombinedService } from '../../service/combine.service';
 })
 export class RegisterComponent {
   formSubmitted = false;
+  formSubmitting = false;
   fullName: string = '';
   userName: string = '';
   email: string = '';
@@ -19,9 +20,9 @@ export class RegisterComponent {
 
   submitForm() {
     this.formSubmitted = true;
+    this.formSubmitting = true;
 
-    this.combinedService
-      .registerUser(this.fullName, this.userName, this.email, this.password, this.isAdmin)
+    this.combinedService.registerUser(this.fullName, this.userName, this.email, this.password, this.isAdmin)
       .subscribe(
         (response: any) => {
           if (response && response.success) {
@@ -32,6 +33,7 @@ export class RegisterComponent {
             this.handleRegistrationError();
             console.error('API request error', response);
           }
+          this.formSubmitting = false;
         },
         (error: any) => {
           if (error instanceof SyntaxError) {
@@ -41,6 +43,7 @@ export class RegisterComponent {
             console.error('API request error', error);
             this.handleRegistrationError();
           }
+          this.formSubmitting = false;
         }
       );
   }

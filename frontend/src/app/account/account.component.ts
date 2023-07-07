@@ -8,6 +8,7 @@ import { SharedService } from '../service/shared.service';
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
+
 export class AccountComponent implements OnInit {
   isDropdownOpen = false;
   loggedIn = false;
@@ -61,6 +62,7 @@ export class AccountComponent implements OnInit {
   }
 
   loadUserEmail() {
+
     const token = localStorage.getItem('token');
     const userID = localStorage.getItem('userID'); // Get the userID from localStorage
 

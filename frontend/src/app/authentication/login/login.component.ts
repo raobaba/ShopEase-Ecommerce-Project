@@ -10,11 +10,12 @@ import { SharedService } from '../../service/shared.service';
 })
 export class LoginComponent {
   formSubmitted = false;
+  formSubmitting = false;
   userName: string = '';
   email: string = '';
   password: string = '';
   loggedIn = false;
-  userEmail: string = ''; 
+  userEmail: string = '';
 
   constructor(
     private combinedService: CombinedService,
@@ -24,6 +25,8 @@ export class LoginComponent {
 
   submitForm() {
     this.formSubmitted = true;
+    this.formSubmitting = true;
+
     const formData = {
       userName: this.userName,
       email: this.email,
@@ -58,6 +61,7 @@ export class LoginComponent {
           this.handleLoginError();
           console.error('API request error', response);
         }
+        this.formSubmitting = false;
       },
       (error: any) => {
         if (error instanceof SyntaxError) {
@@ -67,12 +71,13 @@ export class LoginComponent {
           console.error('API request error', error);
           this.handleLoginError();
         }
+        this.formSubmitting = false;
       }
     );
   }
 
   logout() {
-    localStorage.removeItem('token'); 
+    localStorage.removeItem('token');
     this.sharedService.setLoggedInStatus(false);
     this.router.navigateByUrl('/');
   }
