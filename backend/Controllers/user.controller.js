@@ -41,11 +41,11 @@ const loginUser = async (req, res) => {
           res.setHeader('Authorization', `Bearer ${token}`);
           res.status(200).json({ success: true, message: 'Login Successful', token, userID: user._id });
         } else {
-          res.status(401).json({ success: false, message: 'Wrong Credentials' });
+          res.status(401).json({ success: false, message: 'Wrong Password' });
         }
       });
     } else {
-      res.status(401).json({ success: false, message: 'Wrong Credentials' });
+      res.status(401).json({ success: false, message: 'Wrong Email' });
     }
   } catch (err) {
     console.log(err);

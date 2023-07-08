@@ -15,6 +15,7 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   isAdmin: boolean = false;
+  responseMessage: string = '';
 
   constructor(private combinedService: CombinedService, private router: Router) {}
 
@@ -26,29 +27,30 @@ export class RegisterComponent {
       .subscribe(
         (response: any) => {
           if (response && response.success) {
-            alert('SIGNUP SUCCESSFUL');
+            this.responseMessage = 'SIGNUP SUCCESSFUL';
             console.log('API request successful', response);
             this.router.navigate(['/authentication/login']);
           } else {
-            this.handleRegistrationError();
+            this.responseMessage = 'Error: ' + response.message;
             console.error('API request error', response);
           }
           this.formSubmitting = false;
+          alert(this.responseMessage);
         },
         (error: any) => {
           if (error instanceof SyntaxError) {
-            this.handleRegistrationError();
+            this.responseMessage = 'Error occurred during signup. Please try again later.';
             console.error('JSON parsing error', error);
+          } else if (error.status === 400) {
+            this.responseMessage = 'This email is already in use. Try to register with another email.';
+            console.error('Bad Request error', error);
           } else {
+            this.responseMessage = 'Error: ' + error.message;
             console.error('API request error', error);
-            this.handleRegistrationError();
           }
           this.formSubmitting = false;
+          alert(this.responseMessage);
         }
       );
-  }
-
-  private handleRegistrationError() {
-    alert('Error occurred during signup. Please try again later.');
   }
 }

@@ -20,6 +20,7 @@ import { ElectronicsComponent } from './electronics/electronics.component';
 import { TopOffersComponent } from './top-offers/top-offers.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 @NgModule({
   declarations: [
     AppComponent,
