@@ -13,7 +13,7 @@ const authenticate = (req, res, next) => {
             res.send("Please Login")
         }
     } else {
-        res.send("Please Login")
+        res.send("Please Login First")
     }
 }
 module.exports = {

@@ -3,12 +3,13 @@ const { ProductModel } = require('../Models/product.model.js');
 // Get all products
 const getAllProducts = async (req, res) => {
   try {
-    const products = await ProductModel.find();
-    res.json(products);
+    const product = await ProductModel.find();
+    res.status(200).json(product);
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: error.message || 'Internal server error' });
   }
 };
+
 
 // Get a single product by ID
 const getProductById = async (req, res) => {
