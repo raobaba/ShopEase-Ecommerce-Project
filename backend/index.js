@@ -6,8 +6,10 @@ dotenv.config();
 const app = express();
 const UserRouter = require('./Routes/user.route.js');
 const ProductRouter = require('./Routes/product.route.js');
+const OfferRouter = require('./Routes/offer.route.js');
 app.use(express.json());
 app.use(cors());
+app.use('/', OfferRouter)
 app.use('/', ProductRouter);
 app.use('/', UserRouter);
 Connection();

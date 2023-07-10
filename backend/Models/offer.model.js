@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const productSchema = new mongoose.Schema({
+const offerSchema = new mongoose.Schema({
     id: String,
     url: String,
     detailUrl: String,
@@ -10,6 +10,6 @@ const productSchema = new mongoose.Schema({
     discount: String,
     tagline: String 
 });
-const Product = mongoose.model('product',productSchema);
-module.exports={Product}
+const offerModel = mongoose.model('Offer',offerSchema);
+module.exports={offerModel}
 

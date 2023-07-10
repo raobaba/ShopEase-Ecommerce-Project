@@ -1,4 +1,4 @@
-const offerController = require('./offerController'); 
+const {offerController} = require('../Controllers/offer.controller.js'); 
 const express = require('express');
 const offerRouter = express.Router();
 

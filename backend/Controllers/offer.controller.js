@@ -1,8 +1,8 @@
-const Offer = require("../Models/offer.model.js");
+const { offerModel } = require("../Models/offer.model.js");
 
 // Controller function to retrieve all offers
 const getAllOffers = (req, res) => {
-  Offer.find()
+  offerModel.find()
     .then((offers) => {
       res.json(offers);
     })
@@ -16,7 +16,7 @@ const getAllOffers = (req, res) => {
 const getOfferById = (req, res) => {
   const offerId = req.params.id;
 
-  Offer.findById(offerId)
+  offerModel.findById(offerId)
     .then((offer) => {
       if (offer) {
         res.json(offer);
@@ -34,7 +34,7 @@ const getOfferById = (req, res) => {
 const createOffer = (req, res) => {
   const newOffer = req.body;
 
-  Offer.create(newOffer)
+  offerModel.create(newOffer)
     .then((offer) => {
       res.json(offer);
     })
@@ -49,7 +49,7 @@ const updateOffer = (req, res) => {
   const offerId = req.params.id;
   const updatedOffer = req.body;
 
-  Offer.findByIdAndUpdate(offerId, updatedOffer, { new: true })
+  offerModel.findByIdAndUpdate(offerId, updatedOffer, { new: true })
     .then((offer) => {
       if (offer) {
         res.json(offer);
@@ -67,7 +67,7 @@ const updateOffer = (req, res) => {
 const deleteOffer = (req, res) => {
   const offerId = req.params.id;
 
-  Offer.findByIdAndDelete(offerId)
+  offerModel.findByIdAndDelete(offerId)
     .then((offer) => {
       if (offer) {
         res.json({ message: 'Offer deleted successfully' });
