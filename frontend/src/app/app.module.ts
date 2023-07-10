@@ -20,6 +20,8 @@ import { ElectronicsComponent } from './electronics/electronics.component';
 import { TopOffersComponent } from './top-offers/top-offers.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { OfferService } from './service/offer.service';
+import { MobileComponent } from './mobile/mobile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ElectronicsComponent,
     TopOffersComponent,
     FooterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MobileComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [OfferService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

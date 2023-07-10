@@ -1,33 +1,34 @@
 <div>
-    <div class="big-box">
-        <div class="box box1">
-            <div style="margin-left: 25%;margin-top: 10%;">
-                <h4>Top
-                    <hr style="display:none"> Offers
-                </h4>
-                <button style="border: none;background-color: cyan;color: antiquewhite;border-radius: 2px;">View
-                    All</button>
-            </div>
-            <img src="https://rukminim1.flixcart.com/flap/128/128/image/f15c02bfeb02d15d.png?q=100" alt="">
-        </div>
-        <div class="slider-container">
-            <div class="slider" #slider>
-                <div class="arrow-button left" (click)="slideLeft()">&lt;</div>
-                <div class="box box2">Box 2</div>
-                <div class="box box3">Box 3</div>
-                <div class="box box4">Box 4</div>
-                <div class="box box5">Box 5</div>
-                <div class="box box6">Box 6</div>
-                <div class="box box7">Box 7</div>
-                <div class="arrow-button right" (click)="slideRight()">&gt;</div>
-            </div>
-        </div>
-        <div class="box box8">
-            <img src="https://rukminim1.flixcart.com/fk-p-flap/464/708/image/f6ca031cbd39d666.jpg?q=70" alt="">
-        </div>
+  <div class="big-box">
+    <div class="box box1">
+      <div style="margin-left: 25%;margin-top: 10%;">
+        <h4>Top
+          <hr style="display:none"> Offers
+        </h4>
+        <button style="border: none;background-color: rgb(218, 16, 113);color: antiquewhite;border-radius: 2px;">View
+          All</button>
+      </div>
+      <img src="https://rukminim1.flixcart.com/flap/128/128/image/f15c02bfeb02d15d.png?q=100" alt="">
     </div>
+    <div class="slider-container">
+      <div class="slider" #slider>
+        <div class="arrow-button left" (click)="slideLeft()">&lt;</div>
+        <div class="box box2" *ngFor="let offer of offers">
+          <div class="offer-info">
+              <img [src]="offer.url" alt="" width="100" height="100">
+            <p class="offer-title">{{ offer.title }}</p>
+            <p class="offer-discount">{{ offer.discount }}</p>
+          </div>
+        </div>
+        <div class="arrow-button right" (click)="slideRight()">&gt;</div>
+      </div>
+    </div>
+    <div class="box box8">
+      <img src="https://rukminim1.flixcart.com/fk-p-flap/464/708/image/f6ca031cbd39d666.jpg?q=70" alt="">
+    </div>
+  </div>
 </div>
 <div class="img-box">
-    <img src="https://rukminim1.flixcart.com/flap/3006/433/image/4789bc3aefd54494.jpg?q=50" alt="">
-    <img src="https://rukminim1.flixcart.com/flap/960/960/image/084789479074d2b2.jpg" alt="">
+  <img src="https://rukminim1.flixcart.com/flap/3006/433/image/4789bc3aefd54494.jpg?q=50" alt="">
+  <img src="https://rukminim1.flixcart.com/flap/960/960/image/084789479074d2b2.jpg" alt="">
 </div>

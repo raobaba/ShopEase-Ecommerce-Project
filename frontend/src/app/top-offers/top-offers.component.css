@@ -13,7 +13,6 @@
     justify-content: center;
     align-items: center;
     background-color: #fff;
-    border: 1px solid #ccc;
     padding: 20px;
     font-weight: bold;
     height: 100%;
@@ -25,6 +24,7 @@
     left: 0;
     right: 0;
   }
+
   .box1 {
     margin-right: auto;
     display: grid;
@@ -40,28 +40,27 @@
   }
 
   @media (max-width:991.98px){
-    .box8 img{
-        width: 129%;
-        height: 118%;
-      }
+    .box8{
+      display: none;
+    }
+    .box1 button{
+      width: 50px;
+    }
   }
   @media (max-width:768.98px){
-    .box8 img{
-        width: 90px;
-        height: 118%;
-      }
+    .box8{
+      display: none;
+    }
   }
   @media (max-width:468.98px){
-    .box8 img{
-        width: 139%;
-        height: 118%;
-      }
+    .box8{
+      display: none;
+    }
   }
   @media (max-width:375px){
-    .box8 img{
-        width: 50px;
-        height: 118%;
-      }
+    .box8{
+      display: none;
+    }
   }
   .arrow-button {
     position: sticky;
